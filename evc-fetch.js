@@ -1,9 +1,9 @@
-// evc-fetch.js - Complete working version with URL parameter handling and FindMyEVC-matched polygon detection
+// evc-fetch.js - Complete working version with URL parameter handling and matched polygon detection
 
 let map, marker, modalMap;
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Check for URL parameters from FindMyEVC FIRST
+  // Check for URL parameters from shared links FIRST
   handleURLParameters();
   
   // Legacy map (hidden via CSS)
@@ -112,14 +112,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Handle URL parameters from FindMyEVC — single source of truth
+// Handle URL parameters from shared links — single source of truth
 function handleURLParameters() {
   const urlParams = new URLSearchParams(window.location.search);
   const evcCode = urlParams.get('evc');
   const evcName = urlParams.get('name');
   
   if (evcCode && evcName) {
-    console.log('🔗 Loading EVC from FindMyEVC:', evcCode, evcName);
+    console.log('🔗 Loading EVC from shared link:', evcCode, evcName);
     const decodedName = decodeURIComponent(evcName);
     displayModal(decodedName, null, null, evcCode, null, null);
     // Clean URL without reloading
@@ -158,7 +158,7 @@ function geocodeAddress(address) {
       alert(err.message);
       const searchBtn = document.getElementById("search-button");
       searchBtn.disabled = false;
-      searchBtn.textContent = "Find My Garden";
+      searchBtn.textContent = "Find Native Plants";
     });
 }
 
@@ -396,7 +396,7 @@ function fetchEVCData(lat, lon) {
       alert(err.message);
       const searchBtn = document.getElementById("search-button");
       searchBtn.disabled = false;
-      searchBtn.textContent = "Find My Garden";
+      searchBtn.textContent = "Find Native Plants";
       
       const locationBtn = document.getElementById("location-button");
       locationBtn.disabled = false;
@@ -729,7 +729,7 @@ function displayModal(name, status, region, code, lat, lon) {
   // Reset buttons
   const searchBtn = document.getElementById("search-button");
   searchBtn.disabled = false;
-  searchBtn.textContent = "Find My Garden";
+  searchBtn.textContent = "Find Native Plants";
   
   const locationBtn = document.getElementById("location-button");
   locationBtn.disabled = false;
@@ -741,7 +741,7 @@ function displayModal(name, status, region, code, lat, lon) {
   window.currentEvcName = name;
   
   // Log lookup
-  const searchAddress = window.searchedAddress || (lat && lon ? `${lat}, ${lon}` : 'FindMyEVC referral');
+  const searchAddress = window.searchedAddress || (lat && lon ? `${lat}, ${lon}` : 'FindMyNativePlants referral');
   logEVCLookup(searchAddress, lat, lon, code, name);
   
   // Address display — only shown when we have a real address
@@ -764,7 +764,7 @@ function displayModal(name, status, region, code, lat, lon) {
     }
     if (titleEl) titleEl.style.display = "";
   } else {
-    // No coordinates — coming from FindMyEVC, hide the address line
+    // No coordinates — coming from shared link, hide the address line
     if (titleEl) titleEl.style.display = "none";
   }
   
@@ -833,7 +833,7 @@ function displayModal(name, status, region, code, lat, lon) {
       
       if (evcInfo?.recommendations && evcInfo.recommendations.length > 0) {
         const titleEl = document.createElement("h2");
-        titleEl.textContent = "Here's the indigenous plants that belong in your garden.";
+        titleEl.textContent = "Here are native and indigenous plants suited to your area.";
         titleEl.style.fontFamily = "'Abril Fatface', serif";
         titleEl.style.fontSize = "28px";
         titleEl.style.marginTop = "30px";
@@ -973,7 +973,7 @@ function displayModal(name, status, region, code, lat, lon) {
       kitSection.style.border = "1px solid #e2e8f0";
       
       const kitTitle = document.createElement("h2");
-      kitTitle.textContent = "Grow your own Ecological Garden.";
+      kitTitle.textContent = "Grow your own native plant garden.";
       kitTitle.style.fontFamily = "'Abril Fatface', serif";
       kitTitle.style.fontSize = "28px";
       kitTitle.style.marginBottom = "15px";
@@ -1135,7 +1135,7 @@ function displayModal(name, status, region, code, lat, lon) {
       teeSection.style.border = "1px solid #e2e8f0";
       
       const teeTitle = document.createElement("h2");
-      teeTitle.textContent = "Wear your Ecological Garden.";
+      teeTitle.textContent = "Wear your native plant community.";
       teeTitle.style.fontFamily = "'Abril Fatface', serif";
       teeTitle.style.fontSize = "28px";
       teeTitle.style.marginBottom = "15px";
