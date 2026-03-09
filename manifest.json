@@ -1,7 +1,7 @@
 {
-  "name": "Find My Ecological Garden",
-  "short_name": "Eco Garden",
-  "description": "Find indigenous plants for your Melbourne garden",
+  "name": "Find My Native Plants",
+  "short_name": "Native Plants",
+  "description": "Find native and indigenous plants for your area",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

@@ -9,12 +9,24 @@
   <meta name="theme-color" content="#3d4535">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Ecological Garden">
+  <meta name="apple-mobile-web-app-title" content="Find My Native Plants">
   <link rel="apple-touch-icon" href="./icon-192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png">
 
   
-  <title>Find My Ecological Garden | Gardener &amp; Son</title>
+  <title>Find My Native Plants | Gardener &amp; Son</title>
+  <meta name="description" content="Find native and indigenous plants suited to your area in Victoria, with ecological garden context and practical planting guidance.">
+  <link rel="canonical" href="https://findmynativeplants.com.au/">
+  <meta property="og:title" content="Find My Native Plants">
+  <meta property="og:description" content="Discover native and indigenous plants for your area and build a resilient local garden.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://findmynativeplants.com.au/">
+  <meta property="og:site_name" content="Find My Native Plants">
+  <meta property="og:image" content="https://findmynativeplants.com.au/icon-512.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Find My Native Plants">
+  <meta name="twitter:description" content="Discover native and indigenous plants for your area and build a resilient local garden.">
+  <meta name="twitter:image" content="https://findmynativeplants.com.au/icon-512.png">
   <!-- Fonts &amp; Leaflet CSS -->
   <link
     href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=IBM+Plex+Mono:wght@300;400;500;700&display=swap"
@@ -644,10 +656,10 @@
       <div class="step-divider"></div>
       <div class="step">
         <div class="step-number">3</div>
-        <span class="step-text">Find Your Garden</span>
+        <span class="step-text">Find Native Plants</span>
       </div>
     </div>
-    <h2 id="page-title">Find &amp; Grow Your Ecological Garden.</h2>
+    <h2 id="page-title">Find Native Plants for Your Area.</h2>
     <button class="scroll-button" onclick="scrollToSection('section-2')">Get Started</button>
     <div class="scroll-arrow" onclick="scrollToSection('section-2')">&#8595;</div>
   </section>
@@ -667,14 +679,14 @@
       <div class="step-divider"></div>
       <div class="step">
         <div class="step-number">3</div>
-        <span class="step-text">Find Your Garden</span>
+        <span class="step-text">Find Native Plants</span>
       </div>
     </div>
     <p class="hero-highlight">
-      Indigenous plants have grown in harmony with local soils, climate, and wildlife for countless generations, yet have often been lost to development and introduced plants.<br>
-By planting indigenous species, you help restore local biodiversity, support native wildlife, and build climate resilience right from your own garden.
+      Discover native and indigenous plants that naturally suit your local soil, climate, and wildlife.<br>
+Choose plants for your area to create a healthier, more resilient garden with strong ecological value.
     </p>
-    <button class="scroll-button" onclick="scrollToSection('section-3')">Find Your Ecological Garden</button>
+    <button class="scroll-button" onclick="scrollToSection('section-3')">Find Native Plants for Your Area</button>
     <div class="scroll-arrow" onclick="scrollToSection('section-3')">&#8595;</div>
   </section>
 
@@ -693,7 +705,7 @@ By planting indigenous species, you help restore local biodiversity, support nat
       <div class="step-divider"></div>
       <div class="step active">
         <div class="step-number">3</div>
-        <span class="step-text">Find Your Garden</span>
+        <span class="step-text">Find Native Plants</span>
       </div>
     </div>
     <p class="instruction-box">
@@ -708,7 +720,7 @@ By planting indigenous species, you help restore local biodiversity, support nat
           required
         />
         <button id="search-button" type="submit">
-          Find My Ecological Garden
+          Find My Native Plants
         </button>
       </form>
       <button id="location-button" type="button">
@@ -736,7 +748,7 @@ By planting indigenous species, you help restore local biodiversity, support nat
       <div id="modal-map"></div>
       <button id="modal-close">&times;</button>
       <div id="modal-info">
-        <p class="title">Your Ecological Garden at <span id="modal-address"></span>&nbsp;is:</p>
+        <p class="title">Native plants for <span id="modal-address"></span>&nbsp;include:</p>
         <p id="modal-evc-name"></p>
         <p class="status"><strong>Status:</strong> <span id="modal-evc-status"></span></p>
         <p class="region"><strong>Bioregion:</strong> <span id="modal-evc-region"></span></p>
@@ -744,8 +756,8 @@ By planting indigenous species, you help restore local biodiversity, support nat
         <div id="modal-plants"></div>
       </div>
       <div id="email-section">
-        <h2>Join the ecological movement.</h2>
-        <p>Sign up to receive updates, planting tips, and stories from ecological gardens across Victoria.</p>
+        <h2>Join the native plants movement.</h2>
+        <p>Sign up for updates, native planting tips, and local ecological garden stories from across Victoria.</p>
         <form
           id="gf-form"
           action="https://docs.google.com/forms/d/e/1FAIpQLScQPHZI3_aT51WnDUpszhO03xYKPVJ76r9uiKC6KoZDP8oXYQ/formResponse"
@@ -868,6 +880,6 @@ By planting indigenous species, you help restore local biodiversity, support nat
       });
     });
   </script>
-  <!-- NOTE: URL parameter handling for findmyevc.com links is done inside evc-fetch.js via handleURLParameters() -->
+  <!-- NOTE: URL parameter handling for shared links is done inside evc-fetch.js via handleURLParameters() -->
 </body>
 </html>
