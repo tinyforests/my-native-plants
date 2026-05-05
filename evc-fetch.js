@@ -369,7 +369,7 @@ function fetchEVCData(lat, lon) {
              "&srsName=EPSG:4326" +
              "&outputFormat=application/json";
 
-  console.log('Fetching EVC data (lat,lon order, buffer=0.01)');
+  console.log('Fetching EVC data (lat,lon order, buffer=0.05)');
   
   fetch(url)
     .then(r => {
@@ -415,7 +415,7 @@ function fetchEVCDataLonLat(lat, lon) {
               "&srsName=EPSG:4326" +
               "&outputFormat=application/json";
 
-  console.log('Fetching EVC data (lon,lat order, buffer=0.01)');
+  console.log('Fetching EVC data (lon,lat order, buffer=0.05)');
   
   return fetch(url)
     .then(r => {
