@@ -403,9 +403,13 @@ async function resolveWA(place){
   }
   const struct = (a.struct_des || '').trim();
   // Split the leading common-name phrase from the scientific-name list that follows.
-  const m = flor.match(/[A-Z][a-z]+\s+[a-z]/);
-  const common  = (m ? flor.slice(0, m.index) : flor).replace(/[\s,;.–-]+$/,'').trim();
-  const species = m ? flor.slice(m.index).trim() : '';
+  // The scientific list starts at the first genus (Capitalised) that is preceded by a
+  // lowercase word — this survives common-name phrases that themselves start capitalised
+  // ("Mainly jarrah and marri Eucalyptus marginata…" splits before "Eucalyptus").
+  const m = flor.match(/[a-z]\s+([A-Z][a-z]+\s+[a-z])/);
+  const cut = m ? m.index + m[0].indexOf(m[1]) : -1;
+  const common  = cut > 0 ? flor.slice(0, cut).replace(/[\s,;.–-]+$/,'').trim() : '';
+  const species = cut > 0 ? flor.slice(cut).trim() : flor.trim();
   return {
     system:'Beard association', code:String(a.veg_assoc || '').replace(/\.0$/,''),
     name: common || struct || 'Beard vegetation association',
