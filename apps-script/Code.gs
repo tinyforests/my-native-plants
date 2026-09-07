@@ -28,7 +28,7 @@
  */
 
 var CONFIG = {
-  SHEET_ID: 'PASTE_YOUR_GOOGLE_SHEET_ID_HERE',
+  SHEET_ID: '1rBGS6xdEqmXb_1kK7Plffi4UGE0mTCWZvfAO-0S7K1E',
   SHEET_NAME: 'subscribers',
   SITE: 'https://findmynativeplants.com.au',
   CONFIRM_REDIRECT: 'https://findmynativeplants.com.au/confirmed/',
