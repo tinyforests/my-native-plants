@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /confirmed/
+Disallow: /unsubscribed/
+
+Sitemap: https://findmynativeplants.com.au/sitemap.xml

@@ -3,173 +3,71 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Find My Native Plants — what grew where you live, before 1750</title>
-<meta name="description" content="Enter any Australian address and find the vegetation that stood there before 1750, and the plants that belong to it.">
+<title>Find My Native Plants — what grew where you live in Australia, before 1750</title>
+<meta name="description" content="Enter any Australian address and find the native vegetation that stood there before 1750 — and the indigenous plants that belong to it. State-by-state pre-European mapping for NSW, VIC, QLD, WA, SA, TAS, NT and the ACT.">
 <link rel="canonical" href="https://findmynativeplants.com.au/">
-<link rel="manifest" href="./manifest.json">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#3d4535">
-<link rel="apple-touch-icon" href="./icon-192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon.png">
-<meta property="og:title" content="Find My Native Plants">
-<meta property="og:description" content="What grew where you live, before 1750 — anywhere in Australia.">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<meta property="og:title" content="Find My Native Plants — before 1750, across Australia">
+<meta property="og:description" content="What grew where you live, before 1750 — anywhere in Australia. Then plant back into it.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://findmynativeplants.com.au/">
 <meta property="og:image" content="https://findmynativeplants.com.au/icon-512.png">
+<meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="geo.region" content="AU">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-/* ============================================================
-   CONFIG — everything swappable lives here
-   ============================================================ */
-:root{
-  --green:#3d4535;      /* Gardener Green */
-  --beige:#fff0dc;      /* Nostalgic Beige */
-  --signal:#7C9A52;     /* Signal Green */
-  --brass:#B49A63;      /* Dry Grass Brass — dividers/accents on light only */
-  --ink:#2b3126;
-  --measure:64ch;
+<link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Organization","@id":"https://findmynativeplants.com.au/#org",
+     "name":"Find My Native Plants","url":"https://findmynativeplants.com.au/",
+     "logo":"https://findmynativeplants.com.au/icon-512.png",
+     "parentOrganization":{"@type":"Organization","name":"Gardener & Son","url":"https://gardenerandson.com"},
+     "areaServed":{"@type":"Country","name":"Australia"},
+     "address":{"@type":"PostalAddress","streetAddress":"2 Churchill Street","addressLocality":"Mont Albert","addressRegion":"VIC","postalCode":"3127","addressCountry":"AU"}},
+    {"@type":"WebSite","@id":"https://findmynativeplants.com.au/#website",
+     "url":"https://findmynativeplants.com.au/","name":"Find My Native Plants",
+     "publisher":{"@id":"https://findmynativeplants.com.au/#org"},
+     "inLanguage":"en-AU",
+     "potentialAction":{"@type":"SearchAction",
+       "target":{"@type":"EntryPoint","urlTemplate":"https://findmynativeplants.com.au/?q={search_term_string}"},
+       "query-input":"required name=search_term_string"}},
+    {"@type":"WebApplication","name":"Find My Native Plants",
+     "url":"https://findmynativeplants.com.au/","applicationCategory":"ReferenceApplication",
+     "operatingSystem":"Any","browserRequirements":"Requires JavaScript",
+     "offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"},
+     "description":"Look up the pre-1750 native vegetation at any Australian address and the indigenous plants that belong to it."},
+    {"@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"What does “before 1750” mean?","acceptedAnswer":{"@type":"Answer","text":"1750 is the standard baseline for pre-European vegetation in Australia — the plant communities that stood before widespread clearing. We read government pre-clearing datasets to tell you which community was at your address."}},
+      {"@type":"Question","name":"How accurate is it for my exact block?","acceptedAnswer":{"@type":"Answer","text":"It depends on your state. NSW and Queensland map to community level, Victoria to Ecological Vegetation Class, Western Australia to broad vegetation association, and everywhere else to national subgroups. Each result is labelled with its resolution so you know how precise it is."}},
+      {"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Official sources: NVIS 7.0 (DCCEEW) nationally, SVTM 1750 (NSW), pre-clear Regional Ecosystems (Queensland Herbarium), Beard pre-European mapping (WA), TASVEG (Tasmania) and Ecological Vegetation Classes (Victoria)."}},
+      {"@type":"Question","name":"Can I get a planting list of species?","acceptedAnswer":{"@type":"Answer","text":"Yes. We are building indigenous planting lists community by community. Enter your address and leave your email to be sent the list for your vegetation type when it is ready."}},
+      {"@type":"Question","name":"Is my address stored?","acceptedAnswer":{"@type":"Answer","text":"No. Your address is used to read the vegetation layer and is not stored against your name. We only keep an email address if you explicitly opt in to receive a planting list, and you can unsubscribe at any time."}}
+    ]}
+  ]
 }
-*{box-sizing:border-box;margin:0;padding:0;border-radius:0}
-html{scroll-behavior:smooth}
-body{
-  background:var(--beige);color:var(--ink);
-  font:400 17px/1.6 "IBM Plex Sans",system-ui,sans-serif;
-  -webkit-font-smoothing:antialiased;
-}
-.noise{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");}
-
-/* ---------- nav ---------- */
-nav{position:sticky;top:0;z-index:50;background:var(--green);color:var(--beige);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 24px;border-bottom:1px solid rgba(255,240,220,.15);}
-nav .mark{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;}
-nav .mark em{font-style:normal;color:var(--signal)}
-nav a{color:var(--beige);text-decoration:none;font-size:14px;border-bottom:1px solid transparent}
-nav a:hover,nav a:focus-visible{border-bottom-color:var(--signal)}
-
-/* ---------- hero (dark) ---------- */
-.hero{background:var(--green);color:var(--beige);padding:96px 24px 104px}
-.hero .wrap{max-width:920px;margin:0 auto}
-.hero h1{font-family:"Abril Fatface",Georgia,serif;font-weight:400;
-  font-size:clamp(38px,6.4vw,74px);line-height:1.02;letter-spacing:-.015em;max-width:15ch}
-.hero h1 i{font-family:"Fraunces",Georgia,serif;font-style:italic;color:var(--signal)}
-.hero h1 .stop{color:var(--signal)}
-.hero p.lede{margin-top:26px;max-width:52ch;font-size:19px;line-height:1.65;color:rgba(255,240,220,.82)}
-
-/* ---------- the search ---------- */
-.search{margin-top:44px;max-width:640px}
-.search label{display:block;font-family:"IBM Plex Mono",monospace;font-size:12px;
-  letter-spacing:.1em;color:var(--signal);margin-bottom:10px}
-.field{display:flex;border:1px solid rgba(255,240,220,.4)}
-.field input{flex:1;min-width:0;background:transparent;border:0;color:var(--beige);
-  padding:18px 18px;font:400 17px/1.4 "IBM Plex Sans",sans-serif}
-.field input::placeholder{color:rgba(255,240,220,.42)}
-.field input:focus{outline:none}
-.field:focus-within{border-color:var(--signal);box-shadow:inset 0 0 0 1px var(--signal)}
-.field button{background:var(--signal);color:#20261a;border:0;cursor:pointer;
-  padding:0 30px;font:500 15px "IBM Plex Sans",sans-serif;letter-spacing:.01em}
-.field button:hover{background:#8dad60}
-.field button:disabled{opacity:.55;cursor:wait}
-.hint{margin-top:12px;font-size:14px;color:rgba(255,240,220,.55)}
-.locbtn{margin-top:14px;background:transparent;border:1px solid rgba(255,240,220,.4);
-  color:rgba(255,240,220,.85);cursor:pointer;padding:11px 18px;
-  font:400 14px "IBM Plex Sans",sans-serif}
-.locbtn:hover{border-color:var(--signal);color:var(--beige)}
-
-/* ---------- results (light) ---------- */
-.results{padding:0 24px 96px;max-width:920px;margin:0 auto}
-.results[hidden]{display:none}
-.card{background:#fff;border-top:3px solid var(--signal);
-  padding:38px 34px;margin-top:-52px;position:relative;z-index:10;
-  box-shadow:0 1px 0 rgba(61,69,53,.09)}
-.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;color:var(--green);opacity:.65}
-.addr{margin-top:6px;font-family:"Fraunces",Georgia,serif;font-size:17px;font-style:italic;color:var(--green)}
-.vegname{font-family:"Abril Fatface",Georgia,serif;font-size:clamp(27px,3.6vw,38px);
-  line-height:1.14;margin-top:22px;color:var(--green);max-width:22ch}
-.character{margin-top:18px;max-width:var(--measure);font-size:17px;line-height:1.7}
-.detail{margin-top:12px;max-width:var(--measure);font-size:15px;line-height:1.6;color:var(--green);opacity:.85}
-
-.species{margin-top:22px;padding:18px 20px;background:rgba(124,154,82,.08);border-left:3px solid var(--signal)}
-.species span{display:block;font-family:"IBM Plex Mono",monospace;font-size:11px;
-  letter-spacing:.09em;color:var(--green);opacity:.7;margin-bottom:7px}
-.species p{font-size:16px;line-height:1.6}
-.species i{font-style:italic}
-
-.meta{margin-top:30px;padding-top:22px;border-top:1px solid var(--brass);
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:22px}
-.meta div span{display:block;font-family:"IBM Plex Mono",monospace;font-size:11px;
-  letter-spacing:.09em;color:var(--green);opacity:.6;margin-bottom:5px}
-.meta div strong{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:15px;color:var(--ink)}
-
-/* ---------- Victorian handoff ---------- */
-.handoff{margin-top:22px;background:var(--green);color:var(--beige);padding:28px 32px}
-.handoff h3{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:21px}
-.handoff p{margin-top:10px;max-width:56ch;color:rgba(255,240,220,.8);font-size:16px}
-.handoff a{display:inline-block;margin-top:16px;color:var(--signal);
-  font-family:"IBM Plex Mono",monospace;font-size:14px;
-  border-bottom:1px solid var(--signal);text-decoration:none;padding-bottom:2px}
-
-/* ---------- present-day context (TAS) ---------- */
-.context{margin-top:22px;background:#fff;padding:26px 30px;border-left:3px solid var(--brass)}
-.context span{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.09em;color:var(--green);opacity:.7}
-.context h3{margin-top:8px;font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:19px;color:var(--green)}
-.context p{margin-top:8px;max-width:var(--measure);font-size:15px;line-height:1.6}
-
-/* ---------- species gate ---------- */
-.gate{margin-top:22px;background:#fff;padding:34px;border-left:3px solid var(--brass)}
-.gate h3{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:22px;color:var(--green)}
-.gate p{margin-top:12px;max-width:var(--measure);font-size:16px}
-.gate form{margin-top:22px;display:flex;max-width:470px;border:1px solid var(--green)}
-.gate input{flex:1;min-width:0;border:0;padding:15px;font:400 16px "IBM Plex Sans",sans-serif;background:transparent}
-.gate input:focus{outline:none}
-.gate form:focus-within{box-shadow:inset 0 0 0 1px var(--signal);border-color:var(--signal)}
-.gate button{border:0;background:var(--green);color:var(--beige);padding:0 24px;
-  cursor:pointer;font:500 15px "IBM Plex Sans",sans-serif}
-.gate button:hover{background:#4a543f}
-.gate .done{margin-top:18px;font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--signal)}
-
-/* ---------- states ---------- */
-.state{margin-top:-52px;position:relative;z-index:10;background:#fff;padding:34px;
-  border-top:3px solid var(--brass)}
-.state h3{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:21px;color:var(--green)}
-.state p{margin-top:10px;max-width:var(--measure)}
-.spinner{display:inline-block;width:13px;height:13px;border:2px solid rgba(61,69,53,.25);
-  border-top-color:var(--green);animation:spin .7s linear infinite;vertical-align:-1px;margin-right:9px}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.spinner{animation-duration:2.4s}}
-
-/* ---------- footer ---------- */
-footer{background:var(--green);color:rgba(255,240,220,.62);padding:52px 24px;font-size:14px}
-footer .wrap{max-width:920px;margin:0 auto;display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between}
-footer a{color:var(--beige);text-decoration:none;border-bottom:1px solid rgba(255,240,220,.3)}
-footer .src{font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.9;max-width:52ch}
-
-:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
-@media(max-width:620px){
-  .hero{padding:64px 20px 88px}
-  .field{flex-direction:column}
-  .field button{padding:16px}
-  .card,.state,.gate{padding:28px 22px}
-  .gate form{flex-direction:column}
-  .gate button{padding:15px}
-}
-</style>
+</script>
 </head>
 <body>
 <div class="noise"></div>
 
 <nav>
   <span class="mark">FIND MY NATIVE PLANTS <em>·</em> AU</span>
-  <a href="about.html">About</a>
+  <a href="/about.html">About</a>
 </nav>
 
 <header class="hero">
   <div class="wrap">
     <h1>Something grew here <i>before you did</i><span class="stop">.</span></h1>
-    <p class="lede">Every address in Australia sits on a vegetation type that stood there before 1750. Enter yours and find out which one — then plant back into it.</p>
+    <p class="lede">Every address in Australia sits on a native vegetation type that stood there before 1750. Enter yours and find out which one — then plant back into it.</p>
 
     <div class="search">
       <label for="addr">Your address, suburb or postcode</label>
@@ -186,6 +84,47 @@ footer .src{font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.9
 
 <main class="results" id="results" hidden></main>
 
+<!-- Crawlable state index — the national ranking layer -->
+<section class="prose wide" id="states">
+  <h2>Pre-1750 vegetation, state by state</h2>
+  <p>Australia has no single pre-European vegetation map — each state and territory mapped its own,
+     at its own resolution. We read the best available layer for wherever you search. Start with your state:</p>
+</section>
+<nav class="stategrid" aria-label="States and territories">
+  <a href="/nsw/">New South Wales <small>Plant Community Types (SVTM 1750)</small></a>
+  <a href="/vic/">Victoria <small>Ecological Vegetation Classes</small></a>
+  <a href="/qld/">Queensland <small>Regional Ecosystems (pre-clear)</small></a>
+  <a href="/wa/">Western Australia <small>Beard pre-European</small></a>
+  <a href="/sa/">South Australia <small>Pre-European floristic</small></a>
+  <a href="/tas/">Tasmania <small>NVIS + TASVEG today</small></a>
+  <a href="/nt/">Northern Territory <small>NVIS subgroups</small></a>
+  <a href="/act/">Australian Capital Territory <small>NVIS subgroups</small></a>
+</nav>
+
+<section class="faq" aria-label="Frequently asked questions">
+  <h2 style="font-family:'Fraunces',serif;color:var(--green);font-size:24px;margin:8px 0 4px">Common questions</h2>
+  <details open><summary>What does “before 1750” mean?</summary>
+    <p>1750 is the standard baseline for pre-European vegetation in Australia — the plant communities that
+       stood before widespread clearing. We read government pre-clearing datasets to tell you which community
+       was at your address.</p></details>
+  <details><summary>How accurate is it for my exact block?</summary>
+    <p>It depends on your state. NSW and Queensland map to community level, Victoria to Ecological Vegetation
+       Class, Western Australia to a broad vegetation association, and everywhere else to national subgroups.
+       Every result is labelled with its resolution so you know how precise it is.</p></details>
+  <details><summary>Where does the data come from?</summary>
+    <p>Official sources: NVIS 7.0 (DCCEEW) nationally, SVTM 1750 (NSW), pre-clear Regional Ecosystems
+       (Queensland Herbarium), Beard pre-European mapping (WA), TASVEG (Tasmania) and Ecological Vegetation
+       Classes (Victoria, via findmyevc).</p></details>
+  <details><summary>Can I get a planting list of species?</summary>
+    <p>Yes. We’re building indigenous planting lists community by community. Enter your address and leave your
+       email to be sent the list for your vegetation type when it’s ready — it’s double opt-in, so we only email
+       you after you confirm.</p></details>
+  <details><summary>Is my address stored?</summary>
+    <p>No. Your address is used to read the vegetation layer and isn’t stored against your name. We only keep an
+       email if you opt in to a planting list, and you can unsubscribe anytime. See our
+       <a href="/privacy.html">privacy policy</a>.</p></details>
+</section>
+
 <footer>
   <div class="wrap">
     <p class="src">
@@ -198,435 +137,11 @@ footer .src{font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.9
       Geocoding: OpenStreetMap Nominatim.
     </p>
     <p>A <a href="https://gardenerandson.com">Gardener &amp; Son</a> project.<br>
-       Feeds the <a href="https://ecologicalregistry.org">Ecological Registry</a>.</p>
+       Feeds the <a href="https://ecologicalregistry.org">Ecological Registry</a>.<br>
+       <a href="/privacy.html">Privacy</a> · <a href="/about.html">About</a> · <a href="/contact.html">Contact</a></p>
   </div>
 </footer>
 
-<script>
-/* ============================================================
-   CONFIG
-   ============================================================ */
-const CFG = {
-  geocode: 'https://nominatim.openstreetmap.org/search',
-  // Same column shape as the fmevc lookup sheet so the demand dashboard reads it unchanged.
-  logEndpoint: '',  // ← paste the Apps Script /exec URL (optional; console-logs until set)
-  // Email capture reuses the existing Gardener & Son Google Form (proven, same sheet as the VIC site).
-  gate: {
-    url:     'https://docs.google.com/forms/d/e/1FAIpQLScQPHZI3_aT51WnDUpszhO03xYKPVJ76r9uiKC6KoZDP8oXYQ/formResponse',
-    email:   'entry.732959100',
-    address: 'entry.1492023911',
-    code:    'entry.1435626710'
-  }
-};
-
-/* Live, CORS-verified endpoints (audited 5 Sep 2026, re-verified from browser origin). */
-const EP = {
-  nvis: 'https://gis.environment.gov.au/gispubmap/rest/services/ogc_services/NVIS_pre_mvs/MapServer',
-  nsw:  'https://mapprod3.environment.nsw.gov.au/arcgis/rest/services/VIS/SVTM_NSW_1750_PCT/MapServer',
-  qld:  'https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Biota/VegetationManagement/MapServer/15',
-  wa:   'https://services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services/Environment/MapServer/17',
-  tas:  'https://services.thelist.tas.gov.au/arcgis/rest/services/Public/NaturalEnvironment/MapServer/0'
-};
-
-/* Nominatim state string → code. Drives resolver tiering. */
-const STATE_CODE = {
-  'victoria':'VIC','new south wales':'NSW','queensland':'QLD',
-  'western australia':'WA','south australia':'SA','tasmania':'TAS',
-  'northern territory':'NT','australian capital territory':'ACT',
-  'jervis bay territory':'ACT'
-};
-
-/* Queensland land zones — the middle number of an RE code (bioregion.landzone.veg).
-   Gives a geologically honest character line before REDD descriptions are bundled. */
-const QLD_LANDZONE = {
-  '1':'Tidal flats and saline coastal lands — mangrove and saltmarsh country.',
-  '2':'Coastal dunes and beach ridges — deep sands close to the sea.',
-  '3':'Alluvial river and creek flats — the richest, most-cleared country in the region.',
-  '4':'Cracking clay plains on Cainozoic sediments — grassland and open woodland.',
-  '5':'Old loamy and sandy plains on remnant Cainozoic surfaces.',
-  '6':'Cainozoic sand plains and dunes inland — low, sclerophyll-rich vegetation.',
-  '7':'Lateritic duricrust — ironstone-capped rises with hardy heath and woodland.',
-  '8':'Cainozoic igneous rocks, basalt — fertile red soils, historically well-treed.',
-  '9':'Fine-grained sedimentary rocks — undulating woodland country.',
-  '10':'Coarse sedimentary rocks — sandstone ranges and scarps.',
-  '11':'Metamorphic rocks — hilly, mixed woodland and forest.',
-  '12':'Granite and other igneous rocks — boulder country with distinctive flora.'
-};
-
-/* MVS / vegetation character lines — keyword matched against whatever name string
-   the resolver returns. Content layer only; the classification always comes from the service. */
-const CHARACTER = [
-  [/rainforest|vine thicket/i, 'Closed canopy, deep shade, moisture held year round. Structure matters more than any single species here — layers, not specimens.'],
-  [/mallee/i,                  'Multi-stemmed eucalypts from a lignotuber, low and wide, over a sparse understorey. Built for drought and fire, and for very little soil.'],
-  [/hummock grassland|spinifex|triodia/i,'Spinifex rings over sand or stony ground, with scattered trees. Sparse by design, not by degradation.'],
-  [/tussock grassland|grassland/i,'Open ground held by perennial tussocks, with lilies and daisies between them. The most cleared vegetation type in the country.'],
-  [/chenopod|samphire|saltbush|bluebush/i,'Saltbush and bluebush over saline or alkaline soils. Silver-grey, low, and far tougher than it looks.'],
-  [/heath/i,                   'Dense, hard-leaved, low shrubland on poor soils. Extraordinary flowering diversity in a very small vertical space.'],
-  [/mangrove|tidal|saltmarsh/i,'Tidal, saline, and structurally simple above ground. The complexity is in the root systems.'],
-  [/woodland/i,                'Trees spaced with crowns apart, over grass and scattered shrubs. Light reaches the ground — that ground layer is the point.'],
-  [/open forest|tall.*forest|wet sclerophyll/i,'Eucalypt crowns touching or nearly so, over a shrub and ground layer that shifts with aspect and moisture.'],
-  [/forest/i,                  'A eucalypt-dominated canopy with a distinct understorey beneath it. What you plant underneath is what makes it work.'],
-  [/shrubland|acacia|scrub/i,  'Shrubs over open ground, often acacia-led. Nitrogen fixers doing the structural work.'],
-  [/wetland|swamp|lignum|sedge|rush/i,'Seasonally or permanently wet, with sedges, rushes and water-tolerant shrubs. Wet and dry phases are both part of it.']
-];
-const characterFor = name => (CHARACTER.find(([re]) => re.test(name||'')) || [,
-  'A distinct pre-1750 vegetation type with its own structure, soils and species set.'])[1];
-
-/* ============================================================
-   GEOCODE
-   ============================================================ */
-async function geocode(q){
-  const url = `${CFG.geocode}?format=json&countrycodes=au&addressdetails=1&limit=1&q=${encodeURIComponent(q)}`;
-  const r = await fetch(url, { headers:{ 'Accept':'application/json' } });
-  if(!r.ok) throw new Error('geocode');
-  const j = await r.json();
-  if(!j.length) throw new Error('notfound');
-  const hit = j[0];
-  const stateName = (hit.address && hit.address.state || '').toLowerCase();
-  return { lat:+hit.lat, lng:+hit.lon, label:hit.display_name,
-           state: STATE_CODE[stateName] || null };
-}
-
-/* Reverse geocode for the "use my location" button. */
-async function reverse(lat,lng){
-  const url = `https://nominatim.openstreetmap.org/reverse?format=json&addressdetails=1&lat=${lat}&lon=${lng}`;
-  const r = await fetch(url, { headers:{ 'Accept':'application/json' } });
-  if(!r.ok) throw new Error('geocode');
-  const j = await r.json();
-  const stateName = (j.address && j.address.state || '').toLowerCase();
-  return { lat, lng, label:j.display_name || `${lat.toFixed(4)}, ${lng.toFixed(4)}`,
-           state: STATE_CODE[stateName] || null };
-}
-
-/* ============================================================
-   ESRI HELPERS
-   ============================================================ */
-function attr(attrs, needle){
-  const k = Object.keys(attrs||{}).find(k => k.toLowerCase().includes(needle));
-  return k ? attrs[k] : null;
-}
-
-/* Raster identify against a MapServer (returns first result's attributes, or null). */
-async function esriIdentify(baseUrl, lat, lng, layers){
-  const d = 0.01;
-  const p = new URLSearchParams({
-    f:'json',
-    geometry: JSON.stringify({ x:lng, y:lat, spatialReference:{ wkid:4326 } }),
-    geometryType:'esriGeometryPoint', sr:'4326', layers,
-    tolerance:'1', mapExtent:`${lng-d},${lat-d},${lng+d},${lat+d}`,
-    imageDisplay:'400,400,96', returnGeometry:'false'
-  });
-  const r = await fetch(`${baseUrl}/identify?${p}`);
-  if(!r.ok) throw new Error('service');
-  const j = await r.json();
-  return (j.results && j.results[0] && j.results[0].attributes) || null;
-}
-
-/* Vector query against a single MapServer layer (returns first feature's attributes, or null). */
-async function esriQuery(layerUrl, lat, lng, outFields){
-  const p = new URLSearchParams({
-    f:'json',
-    geometry: JSON.stringify({ x:lng, y:lat, spatialReference:{ wkid:4326 } }),
-    geometryType:'esriGeometryPoint', inSR:'4326',
-    spatialRel:'esriSpatialRelIntersects', outFields, returnGeometry:'false'
-  });
-  const r = await fetch(`${layerUrl}/query?${p}`);
-  if(!r.ok) throw new Error('service');
-  const j = await r.json();
-  return (j.features && j.features[0] && j.features[0].attributes) || null;
-}
-
-/* ============================================================
-   RESOLVER — every tier returns the shared schema:
-   { system, code, name, character, detail?, species?, resolution,
-     source, status, note?, context? }
-   ============================================================ */
-async function resolveNVIS(lat, lng, note){
-  const a = await esriIdentify(EP.nvis, lat, lng, 'all:0');
-  const base = { system:'MVS', resolution:'subgroup',
-                 source:'NVIS 7.0 pre-1750 MVS (DCCEEW)', note };
-  const pixel = a && attr(a, 'pixel value');
-  // NVIS returns the literal string "NoData" for water and for gaps, in a populated results array.
-  if(!a || pixel === null || String(pixel).trim().toLowerCase() === 'nodata'){
-    return { ...base, code:null, name:null, character:null, status:'nodata' };
-  }
-  const name = attr(a,'mvs_name') || attr(a,'mvs name') || null;
-  return { ...base, code:String(pixel).trim(), name,
-           character: characterFor(name), status:'ok' };
-}
-
-async function resolveNSW(place){
-  const a = await esriIdentify(EP.nsw, place.lat, place.lng, 'all:2');
-  const pixel = a && attr(a,'pixel value');
-  const name  = a && (a.PCTName || attr(a,'pctname'));
-  // Central NSW pre-clearing coverage is still in progress — treat gaps as fall-through, not empty.
-  if(!a || !name || String(pixel).trim().toLowerCase() === 'nodata'){
-    return resolveNVIS(place.lat, place.lng,
-      'This point sits outside the mapped SVTM 1750 pre-clearing coverage (Central NSW is still in progress), so the national layer is shown instead.');
-  }
-  const vegClass = a.vegClass || attr(a,'vegclass') || '';
-  const vegForm  = a.vegForm  || attr(a,'vegform')  || '';
-  return {
-    system:'PCT', code:String(a.PCTID || pixel || '').trim(), name,
-    character: characterFor(vegForm || vegClass || name),
-    detail: [vegClass, vegForm].filter(Boolean).join(' · '),
-    resolution:'community',
-    source:'NSW SVTM 1750 PCT (DCCEEW NSW / BioNet)', status:'ok'
-  };
-}
-
-async function resolveQLD(place){
-  const a = await esriQuery(EP.qld, place.lat, place.lng, 're,re_label,re1');
-  const re = a && (a.re || a.re_label || a.re1);
-  if(!a || !re){
-    return resolveNVIS(place.lat, place.lng,
-      'No pre-clear regional ecosystem is mapped at this point, so the national layer is shown instead.');
-  }
-  const code = String(re).trim();
-  const lz = code.split('.')[1];
-  return {
-    system:'RE', code, name:`Regional Ecosystem ${code}`,
-    character: QLD_LANDZONE[lz] || characterFor(''),
-    detail:'Pre-clearing regional ecosystem. The code reads bioregion · land zone · vegetation.',
-    resolution:'community',
-    source:'QLD Pre-clear Regional Ecosystems (Queensland Herbarium)',
-    status:'ok', speciesPending:true
-  };
-}
-
-async function resolveWA(place){
-  const a = await esriQuery(EP.wa, place.lat, place.lng, 'veg_assoc,veg_type,flor_desc,struct_des');
-  const flor = a && a.flor_desc;
-  if(!a || !flor){
-    return resolveNVIS(place.lat, place.lng,
-      'This point sits outside Beard’s pre-European mapping, so the national layer is shown instead.');
-  }
-  const struct = (a.struct_des || '').trim();
-  // Split the leading common-name phrase from the scientific-name list that follows.
-  // The scientific list starts at the first genus (Capitalised) that is preceded by a
-  // lowercase word — this survives common-name phrases that themselves start capitalised
-  // ("Mainly jarrah and marri Eucalyptus marginata…" splits before "Eucalyptus").
-  const m = flor.match(/[a-z]\s+([A-Z][a-z]+\s+[a-z])/);
-  const cut = m ? m.index + m[0].indexOf(m[1]) : -1;
-  const common  = cut > 0 ? flor.slice(0, cut).replace(/[\s,;.–-]+$/,'').trim() : '';
-  const species = cut > 0 ? flor.slice(cut).trim() : flor.trim();
-  return {
-    system:'Beard association', code:String(a.veg_assoc || '').replace(/\.0$/,''),
-    name: common || struct || 'Beard vegetation association',
-    character: characterFor(struct || flor),
-    detail: struct ? `Structural formation: ${struct}.` : '',
-    species: species || null,
-    resolution:'association',
-    source:'WA Beard Pre-European Vegetation, 1:250,000 (Beard et al. 2013)',
-    status:'ok'
-  };
-}
-
-async function resolveTAS(place){
-  // Tasmania has no pre-1750 layer — use NVIS for the classification,
-  // and surface present-day TASVEG alongside it (honestly labelled).
-  const res = await resolveNVIS(place.lat, place.lng);
-  res.note = 'Tasmania has no pre-1750 map. The classification above is the national layer; what’s actually mapped on the ground today is shown below.';
-  try{
-    const a = await esriQuery(EP.tas, place.lat, place.lng, 'VEGCODE,VEGCODE_D,VEG_GROUP');
-    if(a && (a.VEGCODE_D || a.VEGCODE)){
-      res.context = { title:'Mapped there today (TASVEG 3.0)',
-                      body:`${a.VEGCODE_D || a.VEGCODE}${a.VEG_GROUP ? ' — ' + a.VEG_GROUP : ''}.` };
-    }
-  }catch(e){ /* TASVEG optional; NVIS answer already stands */ }
-  return res;
-}
-
-async function resolve(place){
-  switch(place.state){
-    case 'NSW': return resolveNSW(place);
-    case 'QLD': return resolveQLD(place);
-    case 'WA':  return resolveWA(place);
-    case 'TAS': return resolveTAS(place);
-    // VIC resolves on the national layer here, then hands off to findmyevc for the sharp answer.
-    default:    return resolveNVIS(place.lat, place.lng);
-  }
-}
-
-/* fire-and-forget, same columns as the fmevc sheet */
-function log(row){
-  if(!CFG.logEndpoint){ console.log('[lookup]', row); return; }
-  fetch(CFG.logEndpoint, { method:'POST', mode:'no-cors',
-    headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(row) }).catch(()=>{});
-}
-
-/* ============================================================
-   VIEW
-   ============================================================ */
-const $ = s => document.querySelector(s);
-const out = $('#results'), btn = $('#go'), input = $('#addr'), locBtn = $('#locate');
-const esc = s => String(s??'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
-function show(html){ out.innerHTML = html; out.hidden = false; out.scrollIntoView({block:'start'}); }
-
-function renderState(title, body){
-  show(`<section class="state"><h3>${title}</h3><p>${body}</p></section>`);
-}
-
-function renderResult(place, res){
-  const vic = place.state === 'VIC';
-
-  const handoff = vic ? `
-    <section class="handoff">
-      <h3>Victoria is mapped in far more detail</h3>
-      <p>Here the vegetation is classified as an Ecological Vegetation Class — hundreds of types with
-         species lists, instead of the national subgroups shown above. Same address, a much sharper answer.</p>
-      <a href="https://findmyevc.com/?q=${encodeURIComponent(place.label)}">Look this address up on findmyevc →</a>
-    </section>` : '';
-
-  const context = res.context ? `
-    <section class="context">
-      <span>PRESENT DAY</span>
-      <h3>${esc(res.context.title)}</h3>
-      <p>${esc(res.context.body)}</p>
-    </section>` : '';
-
-  const gate = res.status === 'ok' ? `
-    <section class="gate">
-      <h3>The species list for this vegetation</h3>
-      <p>We’re building planting lists community by community, starting with the ones people ask for most.
-         Leave your email and yours arrives the week it’s finished.</p>
-      <form id="gateForm">
-        <input id="gateEmail" type="email" required placeholder="you@example.com" aria-label="Email address">
-        <button type="submit">Send it to me</button>
-      </form>
-      <p class="done" id="gateDone" hidden>Recorded. You’ll hear from us when this one lands.</p>
-    </section>` : '';
-
-  if(res.status === 'nodata'){
-    show(`
-      <section class="card">
-        <p class="eyebrow">NO PRE-1750 VEGETATION MAPPED</p>
-        <p class="addr">${esc(place.label)}</p>
-        <h2 class="vegname">Water, or outside the mapped extent</h2>
-        <p class="character">The national dataset returns nothing for this point. That usually means open water,
-           or a gap in coverage. Try a nearby street address on land.</p>
-        ${res.note ? `<p class="detail">${esc(res.note)}</p>` : ''}
-        <div class="meta">
-          <div><span>STATUS</span><strong>nodata</strong></div>
-          <div><span>SOURCE</span><strong>NVIS 7.0 pre-1750</strong></div>
-        </div>
-      </section>${handoff}`);
-    return;
-  }
-
-  const species = res.species ? `
-    <div class="species">
-      <span>DOMINANT SPECIES (FROM THE MAPPING)</span>
-      <p><i>${esc(res.species)}</i></p>
-    </div>` : (res.speciesPending ? `
-    <div class="species">
-      <span>SPECIES</span>
-      <p>A full species-bearing description for this regional ecosystem is held in Queensland’s
-         REDD database and is being folded in. Leave your email below to get it.</p>
-    </div>` : '');
-
-  show(`
-    <section class="card">
-      <p class="eyebrow">BEFORE 1750, THIS ADDRESS STOOD IN</p>
-      <p class="addr">${esc(place.label)}</p>
-      <h2 class="vegname">${esc(res.name || (res.system + ' ' + res.code))}</h2>
-      ${res.character ? `<p class="character">${esc(res.character)}</p>` : ''}
-      ${res.detail ? `<p class="detail">${esc(res.detail)}</p>` : ''}
-      ${species}
-      ${res.note ? `<p class="detail">${esc(res.note)}</p>` : ''}
-      <div class="meta">
-        <div><span>SYSTEM</span><strong>${esc(res.system)}</strong></div>
-        <div><span>CODE</span><strong>${esc(res.code || '—')}</strong></div>
-        <div><span>RESOLUTION</span><strong>${esc(res.resolution)}</strong></div>
-        <div><span>SOURCE</span><strong>${esc((res.source||'').split('(')[0].trim())}</strong></div>
-      </div>
-    </section>
-    ${context}
-    ${handoff}
-    ${gate}`);
-
-  const form = $('#gateForm');
-  if(form) form.addEventListener('submit', e => {
-    e.preventDefault();
-    const email = $('#gateEmail').value.trim();
-    if(!email) return;
-    const g = CFG.gate;
-    if(g && g.url){
-      const fd = new URLSearchParams();
-      fd.append(g.email, email);
-      fd.append(g.address, place.label);
-      fd.append(g.code, `${res.system} ${res.code} — ${res.name || ''} (${place.state || 'AU'})`);
-      fetch(g.url, { method:'POST', mode:'no-cors',
-        headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:fd.toString() }).catch(()=>{});
-    } else {
-      console.log('[gate]', { email, address:place.label, state:place.state, code:res.code });
-    }
-    form.hidden = true; $('#gateDone').hidden = false;
-  });
-}
-
-async function runWith(place){
-  renderState('<span class="spinner"></span>Reading the vegetation',
-    `Reading the pre-1750 vegetation layer beneath ${esc(place.label)}.`);
-  const res = await resolve(place);
-  log({ timestamp:new Date().toISOString(), address:place.label, lat:place.lat, lng:place.lng,
-        state:place.state, system:res.system, code:res.code, name:res.name,
-        resolution:res.resolution, status:res.status, site:'fmnp', referral:document.referrer||'' });
-  renderResult(place, res);
-}
-
-async function run(){
-  const q = input.value.trim();
-  if(!q){ input.focus(); return; }
-  btn.disabled = true;
-  renderState('<span class="spinner"></span>Looking it up', 'Finding the address, then reading the pre-1750 vegetation layer beneath it.');
-  try{
-    const place = await geocode(q);
-    await runWith(place);
-  }catch(err){ renderError(err); }
-  finally{ btn.disabled = false; }
-}
-
-function renderError(err){
-  if(err.message === 'notfound'){
-    renderState('That address didn’t match', 'Try adding the suburb and state, or use a nearby street address.');
-  }else if(err.message === 'geocode'){
-    renderState('The address lookup is unavailable', 'The geocoding service didn’t respond. Wait a moment and search again.');
-  }else{
-    renderState('The vegetation layer didn’t respond', 'That state’s dataset is served by a government host and is occasionally offline. Search again shortly.');
-  }
-}
-
-btn.addEventListener('click', run);
-input.addEventListener('keydown', e => { if(e.key === 'Enter') run(); });
-
-locBtn.addEventListener('click', () => {
-  if(!navigator.geolocation){ renderState('Location isn’t available', 'Your browser didn’t offer a location. Type an address instead.'); return; }
-  locBtn.disabled = true;
-  renderState('<span class="spinner"></span>Finding you', 'Reading your location, then the vegetation beneath it.');
-  navigator.geolocation.getCurrentPosition(async pos => {
-    try{
-      const place = await reverse(pos.coords.latitude, pos.coords.longitude);
-      await runWith(place);
-    }catch(err){ renderError(err); }
-    finally{ locBtn.disabled = false; }
-  }, () => {
-    locBtn.disabled = false;
-    renderState('Couldn’t read your location', 'Permission was declined or timed out. Type an address instead.');
-  }, { enableHighAccuracy:true, timeout:10000 });
-});
-
-/* Deep-link support: ?q=address runs a lookup on load. */
-(function(){
-  const q = new URLSearchParams(location.search).get('q');
-  if(q){ input.value = q; run(); }
-})();
-
-/* PWA */
-if('serviceWorker' in navigator){
-  window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
-}
-</script>
+<script src="/app.js" defer></script>
 </body>
 </html>
