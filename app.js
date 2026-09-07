@@ -7,7 +7,7 @@ const CFG = {
   logEndpoint: '',  // ← paste the Apps Script /exec URL (optional; console-logs until set)
   // Double opt-in email capture. Post goes to the Apps Script web app (apps-script/Code.gs),
   // which stores a PENDING row and emails a confirmation link. Nobody is added until they click.
-  optinEndpoint: '' // ← paste the Apps Script /exec URL for double opt-in (console-logs until set)
+  optinEndpoint: 'https://script.google.com/macros/s/AKfycbwQAufeg1z8ivI7NK6gVvCkI8TYvKhutuCla01ILif2AHst6FFwp8lSLlKtsTjkG6t-/exec'
 };
 
 /* Live, CORS-verified endpoints (audited 5 Sep 2026, re-verified from browser origin). */
