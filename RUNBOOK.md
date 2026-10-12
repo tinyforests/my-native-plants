@@ -7,7 +7,8 @@ fit, and the exact steps to serve a customer. Keep this current.
 
 A national "what grew here before 1750" tool. Enter any Australian address → read the
 pre-European vegetation at that point from government datasets → offer the indigenous
-planting list for that vegetation, captured by double opt-in and sent by hand (for now).
+planting list for that vegetation, captured by double opt-in and served from curated,
+human-reviewed lists (one per vegetation community — see §5).
 A Gardener & Son project; feeds the Ecological Registry.
 
 ## 2. Live system & where things live
@@ -50,25 +51,34 @@ Unsubscribe link in every send → **UNSUBSCRIBED** → `/unsubscribed/`.
   **Deploy → Manage deployments → edit → New version**. The `/exec` URL stays the same.
   Adding/running a non-web-app function (like a send) needs no redeploy — just Run it.
 
-## 5. Sending a curated species list (the customer-serving loop)
+## 5. Serving planting lists (automated, review-gated)
 
-This is manual and expert-reviewed on purpose — lists must be indigenous-only, and no
-autonomous source can guarantee that yet (ALA occurrence data is ~20% weeds/exotics; its
-native flag is "Not supplied" on ~99% of records). Steps:
+Lists are curated **once per vegetation community** and live in `lists/<SYSTEM>-<CODE>.json`
+(public, no PII), served from the live site. `apps-script/Fulfil.gs` serves subscribers from them:
 
-1. **Find who's waiting:** in the `subscribers` sheet, rows with `status = CONFIRMED` and an
-   empty `sentAt`.
-2. **Ground-truth the flora** at their point (example query in `apps-script/` history):
-   ALA biocache `occurrences/search?fq=kingdom:Plantae&fq=taxonRank:species&lat=&lon=&radius=2&facets=scientificName&fsort=count`.
-   Use it as evidence, not gospel — filter out exotics/weeds and family/genus-only rows.
-3. **Curate** a layered list (canopy → small trees → shrubs → climbers → groundcovers →
-   sedges) of species genuinely indigenous to that community. Keep it true; when unsure, drop it.
-4. **Send:** in the Apps Script project, call the generic sender in
-   `apps-script/SendCuratedList.gs` with the customer's email, token, address and the veg
-   object. It emails from the Gardener & Son account via `buildListEmail_`, includes the
-   Registry CTA + one-click unsubscribe, and stamps `sentAt` so they're not re-sent.
-5. **Never commit customer PII** (email, token, street address) into this public repo. Put
-   real values only in the Apps Script editor (private) at send time.
+- **On confirm** (instant, via `doGet`) and every **15 min** (`processQueue` trigger), each
+  `CONFIRMED` row with no `sentAt`/`draftedAt` is looked up by `system` + `code`:
+  - list exists, `"reviewed": true` → **sent automatically**, `sentAt` stamped.
+  - list exists, `"reviewed": false` → **Gmail draft** created for checking, `draftedAt`
+    stamped, notice to `FULFIL.ADMIN`.
+  - no list → `needsListAt` stamped, **one alert per community** to `FULFIL.ADMIN`. Adding the
+    list later serves everyone waiting on the next queue run.
+- Resubmits by the same person for the same community are stamped together — one list each.
+- `FULFIL.AUTO_SEND_REVIEWED = false` turns auto-send off (everything becomes a draft).
+
+**Adding a community:** copy an existing `lists/*.json`, keep the shape
+(`system, code, reviewed, vegTitle, vegSub, intro, sources, layers[{layer, note, plants[[sci, common]]}]`).
+Key = `system` + `-` + `code`, spaces → `-` (e.g. `Beard-association-1001`, `RE-12.5.3`, `PCT-3433`).
+Curate indigenous-only: ground-truth with ALA biocache
+(`occurrences/search?fq=kingdom:Plantae&fq=taxonRank:species&lat=&lon=&radius=2&facets=scientificName&fsort=count`)
+as evidence, not gospel; the state source (REDD / BioNet / Beard) as the spine. When unsure, drop it.
+Set `"reviewed": true` only once a human has checked it. Push to `main` → live in ~2 min.
+
+**Never commit customer PII** (email, token, street address) to this public repo.
+
+**One-time setup after merging:** paste `Code.gs` + `Fulfil.gs` into the Apps Script project
+(delete `SendHarry.gs` there), Run `installTrigger` (approve the Gmail scope), then
+Deploy → Manage deployments → edit → New version.
 
 ## 6. Email rules (learned)
 
@@ -87,13 +97,14 @@ Built into `buildListEmail_`, so all future sends inherit it. (Registry = `~/Pro
 
 ## 8. Open items / roadmap
 
-- [ ] **Email template:** revise `buildListEmail_` to dark-text-on-light per §6 / harrystreet template.
+- [x] **Email template:** `buildListEmail_` is now dark-text-on-light throughout.
 - [ ] **From-address:** sends come from the script owner's Google account. Set a Gmail
       "Send mail as" Gardener & Son alias for a branded from-address.
 - [ ] **QLD species:** bundle the REDD XLSX (CC-BY) → real QLD species lists.
 - [ ] **Per-search logging:** `CFG.logEndpoint` still blank (email capture works; search demand isn't logged).
-- [ ] **Automation:** a time-driven trigger could draft lists for CONFIRMED-unsent rows for
-      one-click approval. Not autonomous send — integrity gate stays.
+- [x] **Automation:** `Fulfil.gs` — reviewed lists auto-send; unreviewed draft; missing alert.
+- [ ] **Coverage:** every new community still needs one curated list. QLD REDD bundle and NSW
+      BioNet PCT species could pre-fill drafts (still reviewed before `reviewed: true`).
 - [ ] **SEO:** submit `sitemap.xml` in Google Search Console once set up.
 - [ ] `jurisdiction/` — modular resolver library preserved in the repo, not yet wired into the site.
 

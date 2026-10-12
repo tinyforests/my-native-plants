@@ -1,0 +1,188 @@
+{
+  "system": "RE",
+  "code": "12.5.3",
+  "reviewed": false,
+  "reviewedBy": "",
+  "reviewedAt": "",
+  "vegTitle": "Scribbly Gum Woodland",
+  "vegSub": "Regional Ecosystem 12.5.3 · Eucalyptus racemosa woodland on remnant Tertiary surfaces (Endangered) · Southeast Queensland",
+  "intro": "Before 1750 your address stood in tall, shrubby woodland of Scribbly Gum, Pink Bloodwood and Grey Ironbark, often with White Stringybark, Blackbutt and Tallowwood, on the old iron-rich lateritic soils of coastal Southeast Queensland. Of roughly 57,000 hectares that once grew from Noosa southward, about 6,000 remain — most of it cleared for pine plantation, horticulture and suburbs — and it is now listed as Endangered. It is prime koala country and a hollow-rich home for gliders, possums and birds, so replanting it here genuinely matters. The plants below are indigenous to this community and grouped by the layer they fill. Plant the canopy first; the shrubs, lilies, sedges and grasses belong in the light beneath it.",
+  "sources": [
+    "Queensland Herbarium REDD v13.1 — RE 12.5.3",
+    "Moreton Bay Regional Council RE 12.5.3 species list"
+  ],
+  "layers": [
+    {
+      "layer": "Canopy trees",
+      "note": "The framework — plant these first. Most are koala food or habitat trees.",
+      "plants": [
+        [
+          "Eucalyptus racemosa subsp. racemosa",
+          "Scribbly Gum"
+        ],
+        [
+          "Corymbia intermedia",
+          "Pink Bloodwood"
+        ],
+        [
+          "Eucalyptus siderophloia",
+          "Grey Ironbark"
+        ],
+        [
+          "Eucalyptus tindaliae",
+          "Queensland White Stringybark"
+        ],
+        [
+          "Eucalyptus resinifera",
+          "Red Mahogany"
+        ],
+        [
+          "Eucalyptus pilularis",
+          "Blackbutt"
+        ],
+        [
+          "Eucalyptus microcorys",
+          "Tallowwood"
+        ],
+        [
+          "Angophora leiocarpa",
+          "Smooth-barked Apple"
+        ]
+      ]
+    },
+    {
+      "layer": "Small trees & tall shrubs",
+      "note": "",
+      "plants": [
+        [
+          "Allocasuarina littoralis",
+          "Black She-oak"
+        ],
+        [
+          "Acacia aulacocarpa",
+          "Hickory Wattle"
+        ],
+        [
+          "Alphitonia excelsa",
+          "Soap Tree"
+        ],
+        [
+          "Banksia integrifolia",
+          "Coast Banksia"
+        ],
+        [
+          "Lophostemon suaveolens",
+          "Swamp Box"
+        ],
+        [
+          "Elaeocarpus obovatus",
+          "Hard Quandong"
+        ],
+        [
+          "Melaleuca quinquenervia",
+          "Broad-leaved Paperbark (lower, damper ground)"
+        ],
+        [
+          "Acacia leiocalyx",
+          "Early Black Wattle"
+        ]
+      ]
+    },
+    {
+      "layer": "Shrubs",
+      "note": "",
+      "plants": [
+        [
+          "Banksia spinulosa subsp. collina",
+          "Golden Candlesticks"
+        ],
+        [
+          "Jacksonia scoparia",
+          "Dogwood"
+        ],
+        [
+          "Lomatia silaifolia",
+          "Crinkle Bush"
+        ],
+        [
+          "Psydrax odorata",
+          "Shiny-leaved Canthium"
+        ]
+      ]
+    },
+    {
+      "layer": "Climbers",
+      "note": "",
+      "plants": [
+        [
+          "Hardenbergia violacea",
+          "Purple Coral Pea"
+        ],
+        [
+          "Kennedia rubicunda",
+          "Dusky Coral Pea"
+        ],
+        [
+          "Glycine tomentella",
+          "Woolly Glycine"
+        ]
+      ]
+    },
+    {
+      "layer": "Groundcovers, herbs, lilies & ferns",
+      "note": "",
+      "plants": [
+        [
+          "Goodenia rotundifolia",
+          "Round-leaved Goodenia"
+        ],
+        [
+          "Viola hederacea",
+          "Native Violet"
+        ],
+        [
+          "Tricoryne elatior",
+          "Yellow Autumn-lily"
+        ],
+        [
+          "Desmodium rhytidophyllum",
+          "Rusty Tick-trefoil"
+        ],
+        [
+          "Cheilanthes tenuifolia",
+          "Rock Fern"
+        ],
+        [
+          "Pteridium esculentum",
+          "Common Bracken"
+        ]
+      ]
+    },
+    {
+      "layer": "Sedges & grasses",
+      "note": "The ground layer that ties it together.",
+      "plants": [
+        [
+          "Themeda triandra",
+          "Kangaroo Grass"
+        ],
+        [
+          "Entolasia stricta",
+          "Wiry Panic"
+        ],
+        [
+          "Imperata cylindrica",
+          "Blady Grass"
+        ],
+        [
+          "Lepidosperma laterale",
+          "Variable Sword-sedge"
+        ],
+        [
+          "Gahnia aspera",
+          "Rough Saw-sedge"
+        ]
+      ]
+    }
+  ]
+}
