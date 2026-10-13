@@ -1,0 +1,223 @@
+{
+  "system": "Beard association",
+  "code": "1001",
+  "reviewed": true,
+  "reviewedBy": "Tyson Lundbech",
+  "reviewedAt": "2026-09-12",
+  "vegTitle": "Banksia–Jarrah Woodland",
+  "vegSub": "Beard “Jarrah, banksia or casuarina” association · Swan Coastal Plain, Bassendean sands",
+  "intro": "Before 1750 your address stood in low open woodland of Jarrah and Marri over Banksia, on the deep grey Bassendean sands of the Swan Coastal Plain. It is fire-adapted, nutrient-poor country with an extraordinarily rich understorey — the plants below are indigenous to this exact community and grouped by the layer they fill. Plant the canopy first; the wildflowers and sedges belong in the light and leaf-litter beneath it.",
+  "sources": [
+    "Beard et al. 2013, WA Pre-European Vegetation"
+  ],
+  "layers": [
+    {
+      "layer": "Canopy trees",
+      "note": "The framework — plant these first.",
+      "plants": [
+        [
+          "Eucalyptus marginata",
+          "Jarrah"
+        ],
+        [
+          "Corymbia calophylla",
+          "Marri"
+        ],
+        [
+          "Banksia attenuata",
+          "Slender Banksia"
+        ],
+        [
+          "Banksia menziesii",
+          "Firewood Banksia"
+        ],
+        [
+          "Allocasuarina fraseriana",
+          "Common Sheoak"
+        ],
+        [
+          "Nuytsia floribunda",
+          "WA Christmas Tree"
+        ]
+      ]
+    },
+    {
+      "layer": "Small trees & tall shrubs",
+      "note": "",
+      "plants": [
+        [
+          "Banksia ilicifolia",
+          "Holly-leaved Banksia"
+        ],
+        [
+          "Banksia grandis",
+          "Bull Banksia"
+        ],
+        [
+          "Banksia sessilis",
+          "Parrotbush"
+        ],
+        [
+          "Allocasuarina humilis",
+          "Dwarf Sheoak"
+        ],
+        [
+          "Jacksonia sternbergiana",
+          "Green Stinkwood"
+        ],
+        [
+          "Adenanthos cygnorum",
+          "Woollybush"
+        ],
+        [
+          "Macrozamia riedlei",
+          "Zamia"
+        ],
+        [
+          "Xanthorrhoea preissii",
+          "Balga / Grasstree"
+        ]
+      ]
+    },
+    {
+      "layer": "Shrubs",
+      "note": "",
+      "plants": [
+        [
+          "Acacia pulchella",
+          "Prickly Moses"
+        ],
+        [
+          "Acacia stenoptera",
+          "Narrow-winged Wattle"
+        ],
+        [
+          "Calothamnus quadrifidus",
+          "One-sided Bottlebrush"
+        ],
+        [
+          "Calothamnus sanguineus",
+          "Silky-leaved Blood-flower"
+        ],
+        [
+          "Hypocalymma robustum",
+          "Swan River Myrtle"
+        ],
+        [
+          "Hibbertia hypericoides",
+          "Yellow Buttercups"
+        ],
+        [
+          "Daviesia divaricata",
+          "Marno"
+        ],
+        [
+          "Bossiaea eriocarpa",
+          "Common Brown Pea"
+        ],
+        [
+          "Gompholobium tomentosum",
+          "Hairy Yellow Pea"
+        ],
+        [
+          "Petrophile linearis",
+          "Pixie Mops"
+        ],
+        [
+          "Stirlingia latifolia",
+          "Blueboy"
+        ],
+        [
+          "Hovea trisperma",
+          "Common Hovea"
+        ],
+        [
+          "Scaevola canescens",
+          "Grey Fanflower"
+        ]
+      ]
+    },
+    {
+      "layer": "Climbers",
+      "note": "",
+      "plants": [
+        [
+          "Hardenbergia comptoniana",
+          "Native Wisteria"
+        ],
+        [
+          "Kennedia prostrata",
+          "Running Postman"
+        ]
+      ]
+    },
+    {
+      "layer": "Groundcovers, herbs & wildflowers",
+      "note": "",
+      "plants": [
+        [
+          "Anigozanthos manglesii",
+          "Red-and-green Kangaroo Paw"
+        ],
+        [
+          "Conostylis aculeata",
+          "Prickly Conostylis"
+        ],
+        [
+          "Conostylis juncea",
+          "Rush Conostylis"
+        ],
+        [
+          "Dampiera linearis",
+          "Common Dampiera"
+        ],
+        [
+          "Patersonia occidentalis",
+          "Purple Flag"
+        ],
+        [
+          "Calectasia narragara",
+          "Blue Tinsel Lily"
+        ],
+        [
+          "Burchardia congesta",
+          "Milkmaids"
+        ],
+        [
+          "Dasypogon bromeliifolius",
+          "Pineapple Bush"
+        ],
+        [
+          "Philotheca spicata",
+          "Pepper-and-salt"
+        ],
+        [
+          "Hybanthus calycinus",
+          "Wild Violet"
+        ]
+      ]
+    },
+    {
+      "layer": "Sedges, rushes & grasses",
+      "note": "The ground layer that ties it together.",
+      "plants": [
+        [
+          "Lyginia imberbis",
+          "native rush"
+        ],
+        [
+          "Mesomelaena pseudostygia",
+          "Semaphore Sedge"
+        ],
+        [
+          "Desmocladus flexuosus",
+          "Chain Rush"
+        ],
+        [
+          "Lepidosperma squamatum",
+          "Sword-sedge"
+        ]
+      ]
+    }
+  ]
+}

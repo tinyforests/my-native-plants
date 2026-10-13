@@ -38,7 +38,8 @@ var CONFIG = {
 };
 
 var HEADERS = ['timestamp','email','status','token','address','state','system','code','name',
-               'consent','consentText','source','page','confirmedAt','unsubscribedAt'];
+               'consent','consentText','source','page','confirmedAt','unsubscribedAt',
+               'sentAt','draftedAt','needsListAt'];
 
 function sheet_() {
   var ss = SpreadsheetApp.openById(CONFIG.SHEET_ID);
@@ -64,6 +65,15 @@ function doPost(e) {
     if (String(p.consent) !== 'true') return json_({ ok: false, error: 'consent required' });
 
     var sh = sheet_();
+
+    // Resubmits (e.g. "the confirm email hasn't arrived yet") reuse the open PENDING row
+    // for the same person + community instead of piling up new rows and tokens.
+    var existing = findPending_(sh, email, p.system, p.code);
+    if (existing) {
+      sendConfirmationEmail_(email, existing, p);
+      return json_({ ok: true, status: 'pending', resent: true });
+    }
+
     var token = Utilities.getUuid();
     sh.appendRow([
       new Date(), email, 'PENDING', token,
@@ -88,8 +98,11 @@ function doGet(e) {
     var row = findRowByToken_(sh, token);
     if (row > 0) {
       if (action === 'confirm') {
+        var already = sh.getRange(row, 3).getValue() === 'CONFIRMED';
         sh.getRange(row, 3).setValue('CONFIRMED');
-        sh.getRange(row, 14).setValue(new Date());
+        if (!already) sh.getRange(row, 14).setValue(new Date());
+        // Serve the planting list straight away if we have one (see Fulfil.gs).
+        if (typeof fulfil_ === 'function') fulfil_(row);
         return redirect_(CONFIG.CONFIRM_REDIRECT);
       } else {
         sh.getRange(row, 3).setValue('UNSUBSCRIBED');
@@ -104,7 +117,9 @@ function doGet(e) {
 
 function sendConfirmationEmail_(email, token, p) {
   var confirmUrl = ScriptApp.getService().getUrl() + '?action=confirm&token=' + encodeURIComponent(token);
-  var veg = [p.name, p.code].filter(function (x) { return x; }).join(' · ');
+  // Avoid "Regional Ecosystem 12.5.3 · 12.5.3" when the name already carries the code.
+  var name = String(p.name || ''), code = String(p.code || '');
+  var veg = (code && name.indexOf(code) === -1) ? [name, code].filter(String).join(' · ') : (name || code);
   var subject = 'Confirm your Find My Native Plants list';
   var body =
     'Thanks for asking for the indigenous planting list' + (veg ? ' for ' + veg : '') + '.\n\n' +
@@ -133,6 +148,18 @@ function sendConfirmationEmail_(email, token, p) {
  */
 function unsubscribeUrl(token) {
   return ScriptApp.getService().getUrl() + '?action=unsubscribe&token=' + encodeURIComponent(token);
+}
+
+function findPending_(sh, email, system, code) {
+  var data = sh.getDataRange().getValues();
+  var cutoff = Date.now() - 48 * 3600 * 1000;
+  for (var i = data.length - 1; i >= 1; i--) {
+    var r = data[i];
+    if (String(r[1]).toLowerCase() === email && r[2] === 'PENDING' &&
+        String(r[6]) === String(system || '') && String(r[7]) === String(code || '') &&
+        new Date(r[0]).getTime() > cutoff) return String(r[3]);
+  }
+  return null;
 }
 
 function redirect_(url) {
