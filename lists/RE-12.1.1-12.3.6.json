@@ -1,0 +1,248 @@
+{
+  "system": "RE",
+  "code": "12.1.1/12.3.6",
+  "reviewed": false,
+  "reviewedBy": "",
+  "reviewedAt": "",
+  "vegTitle": "Swamp She-oak & Paperbark Forest",
+  "vegSub": "Regional Ecosystems 12.1.1 / 12.3.6 · Casuarina glauca forest on estuarine margins, with Melaleuca quinquenervia–Blue Gum–Swamp Box forest on the coastal plain · Southeast Queensland",
+  "intro": "Before 1750 your address sat where Moreton Bay's tidal edge met the low coastal plain. On the wettest, saltiest ground stood Swamp She-oak forest with Broad-leaved Paperbark; a little higher grew open paperbark forest with Queensland Blue Gum, Swamp Box and Pink Bloodwood over a grassy, sedgy floor that flooded each wet season. It is koala country and frog country, and it filters water on its way to the bay. Swamp She-oak forest is now listed as Of Concern. The plants below are indigenous to these two communities and grouped by the layer they fill. Plant the canopy first; the lilies, ferns, sedges and grasses belong in the damp light beneath it.",
+  "sources": [
+    "Moreton Bay Regional Council RE 12.1.1 and RE 12.3.6 species lists",
+    "Queensland Herbarium Regional Ecosystem Description Database"
+  ],
+  "layers": [
+    {
+      "layer": "Canopy trees",
+      "note": "The framework — plant these first. Several are koala food or habitat trees.",
+      "plants": [
+        [
+          "Casuarina glauca",
+          "Swamp She-oak"
+        ],
+        [
+          "Melaleuca quinquenervia",
+          "Broad-leaved Paperbark"
+        ],
+        [
+          "Eucalyptus tereticornis",
+          "Queensland Blue Gum"
+        ],
+        [
+          "Lophostemon suaveolens",
+          "Swamp Box"
+        ],
+        [
+          "Corymbia intermedia",
+          "Pink Bloodwood"
+        ],
+        [
+          "Angophora leiocarpa",
+          "Smooth-barked Apple"
+        ]
+      ]
+    },
+    {
+      "layer": "Small trees & tall shrubs",
+      "note": "",
+      "plants": [
+        [
+          "Cupaniopsis anacardioides",
+          "Tuckeroo"
+        ],
+        [
+          "Glochidion sumatranum",
+          "Umbrella Cheese Tree"
+        ],
+        [
+          "Alphitonia excelsa",
+          "Soap Tree"
+        ],
+        [
+          "Allocasuarina littoralis",
+          "Black She-oak"
+        ],
+        [
+          "Acacia disparrima",
+          "Hickory Wattle"
+        ],
+        [
+          "Acacia leiocalyx",
+          "Early Black Wattle"
+        ],
+        [
+          "Acacia maidenii",
+          "Maiden's Wattle"
+        ],
+        [
+          "Melaleuca salicina",
+          "Willow Bottlebrush"
+        ],
+        [
+          "Myrsine variabilis",
+          "Muttonwood"
+        ],
+        [
+          "Exocarpos latifolius",
+          "Broad-leaved Native Cherry"
+        ],
+        [
+          "Polyscias elegans",
+          "Celerywood"
+        ]
+      ]
+    },
+    {
+      "layer": "Shrubs",
+      "note": "",
+      "plants": [
+        [
+          "Acacia fimbriata",
+          "Brisbane Golden Wattle"
+        ],
+        [
+          "Pittosporum revolutum",
+          "Rough-fruit Pittosporum"
+        ],
+        [
+          "Hibiscus diversifolius",
+          "Swamp Hibiscus"
+        ],
+        [
+          "Leptospermum polygalifolium",
+          "Tantoon"
+        ],
+        [
+          "Myoporum acuminatum",
+          "Boobialla"
+        ],
+        [
+          "Boronia polygalifolia",
+          "Dwarf Boronia"
+        ],
+        [
+          "Acrotriche aggregata",
+          "Ground Berry"
+        ],
+        [
+          "Clerodendrum inerme",
+          "Coastal Clerodendrum"
+        ]
+      ]
+    },
+    {
+      "layer": "Climbers",
+      "note": "",
+      "plants": [
+        [
+          "Pandorea jasminoides",
+          "Bower of Beauty"
+        ],
+        [
+          "Parsonsia straminea",
+          "Monkey Rope"
+        ],
+        [
+          "Geitonoplesium cymosum",
+          "Scrambling Lily"
+        ]
+      ]
+    },
+    {
+      "layer": "Lilies, groundcovers & ferns",
+      "note": "",
+      "plants": [
+        [
+          "Crinum pedunculatum",
+          "Swamp Lily"
+        ],
+        [
+          "Dianella brevipedunculata",
+          "Blue Flax-lily"
+        ],
+        [
+          "Pseuderanthemum variabile",
+          "Pastel Flower"
+        ],
+        [
+          "Centella asiatica",
+          "Pennywort"
+        ],
+        [
+          "Velleia spathulata",
+          "Wild Pansy"
+        ],
+        [
+          "Apium prostratum",
+          "Sea Celery"
+        ],
+        [
+          "Blechnum indicum",
+          "Swamp Water Fern"
+        ],
+        [
+          "Lindsaea microphylla",
+          "Lacy Wedge Fern"
+        ],
+        [
+          "Pteridium esculentum",
+          "Common Bracken"
+        ]
+      ]
+    },
+    {
+      "layer": "Sedges, rushes & grasses",
+      "note": "The ground layer that ties it together. The rushes and twig-rush suit the wettest spots or a pond edge.",
+      "plants": [
+        [
+          "Themeda triandra",
+          "Kangaroo Grass"
+        ],
+        [
+          "Capillipedium spicigerum",
+          "Scented-top Grass"
+        ],
+        [
+          "Ottochloa gracillima",
+          "Graceful Grass"
+        ],
+        [
+          "Entolasia stricta",
+          "Wiry Panic"
+        ],
+        [
+          "Imperata cylindrica",
+          "Blady Grass"
+        ],
+        [
+          "Sporobolus virginicus",
+          "Marine Couch"
+        ],
+        [
+          "Gahnia aspera",
+          "Rough Saw-sedge"
+        ],
+        [
+          "Lepidosperma laterale",
+          "Variable Sword-sedge"
+        ],
+        [
+          "Cyperus polystachyos",
+          "Bunchy Sedge"
+        ],
+        [
+          "Fimbristylis dichotoma",
+          "Common Fringe-rush"
+        ],
+        [
+          "Juncus usitatus",
+          "Common Rush"
+        ],
+        [
+          "Baumea articulata",
+          "Jointed Twig-rush"
+        ]
+      ]
+    }
+  ]
+}

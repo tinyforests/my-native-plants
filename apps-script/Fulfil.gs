@@ -91,8 +91,12 @@ function fulfilRow_(sh, col, row, alerted) {
   if (v[col.sentAt - 1] || v[col.draftedAt - 1]) return 'done';  // re-clicked confirm, etc.
   if (!sub.email || !sub.token || !sub.code) return 'skip';
 
+  // Mixed polygons come through as "12.1.1/12.3.6" (dominant first). Prefer a list curated for
+  // the exact mix; otherwise fall back to the dominant community's list.
   var key = listKey_(sub.system, sub.code);
   var list = fetchList_(key);
+  var parts = sub.code.split('/');
+  if (!list && parts.length > 1) list = fetchList_(listKey_(sub.system, parts[0]));
 
   if (!list) {
     if (!sub.needsListAt) {
@@ -121,7 +125,7 @@ function fulfilRow_(sh, col, row, alerted) {
 
 function listKey_(system, code) {
   return (String(system) + '-' + String(code)).trim()
-    .replace(/\s+/g, '-').replace(/[^A-Za-z0-9.\-]/g, '');
+    .replace(/[\s\/]+/g, '-').replace(/[^A-Za-z0-9.\-]/g, '');
 }
 
 function fetchList_(key) {
@@ -274,15 +278,15 @@ function buildListEmail_(meta, layers, token) {
   }).join('');
 
   return '' +
-  '<div style="background:' + beige + ';padding:0;margin:0">' +
-  '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:' + beige + '">' +
+  '<div style="background-color:' + beige + ';padding:0;margin:0">' +
+  '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="' + beige + '" style="background-color:' + beige + '">' +
   '<tr><td align="center" style="padding:32px 16px">' +
   '<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">' +
 
     '<tr><td style="padding:0 4px 14px;color:' + green + ';font-family:monospace;font-size:12px;letter-spacing:2px;border-bottom:2px solid ' + green + '">' +
       'FIND MY NATIVE PLANTS · A GARDENER &amp; SON PROJECT</td></tr>' +
 
-    '<tr><td style="background:#ffffff;padding:34px 30px 8px">' +
+    '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:34px 30px 8px">' +
       '<div style="font-family:monospace;font-size:11px;letter-spacing:1px;color:' + muted + '">BEFORE 1750, YOUR ADDRESS STOOD IN</div>' +
       '<div style="font-family:Georgia,serif;font-size:30px;line-height:1.1;color:' + green + ';margin:8px 0 6px">' + esc_(meta.vegTitle) + '</div>' +
       '<div style="font-size:13px;color:' + muted + '">' + esc_(meta.vegSub) + '</div>' +
@@ -290,7 +294,7 @@ function buildListEmail_(meta, layers, token) {
       '<p style="font-size:15px;line-height:1.7;color:' + ink + ';margin:18px 0 0">' + esc_(meta.intro) + '</p>' +
     '</td></tr>' +
 
-    '<tr><td style="background:#ffffff;padding:6px 30px 30px">' +
+    '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:6px 30px 30px">' +
       '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">' + sections + '</table>' +
       '<div style="border-top:1px solid ' + brass + ';margin-top:26px;padding-top:16px;font-size:13px;line-height:1.6;color:' + ink + '">' +
         'These are indigenous to your vegetation community. Ask your local indigenous nursery for ' +
@@ -299,13 +303,14 @@ function buildListEmail_(meta, layers, token) {
     '</td></tr>' +
 
     // Ecological Registry CTA — carried on every send.
-    '<tr><td style="background:' + beige + ';padding:26px 30px;border-top:1px solid ' + brass + '">' +
+    '<tr><td bgcolor="' + beige + '" style="background-color:' + beige + ';padding:26px 30px;border-top:1px solid ' + brass + '">' +
       '<div style="font-family:Georgia,serif;font-size:20px;color:' + green + ';line-height:1.2">Put your garden on the map.</div>' +
       '<p style="font-size:14px;line-height:1.6;color:' + ink + ';margin:8px 0 16px">' +
         'When you plant back into this community, register your garden on the Ecological Registry — ' +
         'a public record of the native habitat being rebuilt, garden by garden, across Australia.</p>' +
-      '<a href="' + registry + '" style="display:inline-block;background:' + green + ';color:' + beige + ';' +
-        'padding:12px 22px;text-decoration:none;font-family:monospace;font-size:14px;letter-spacing:1px">REGISTER YOUR GARDEN &rarr;</a>' +
+      '<table role="presentation" cellpadding="0" cellspacing="0"><tr><td bgcolor="' + green + '" style="background-color:' + green + ';padding:12px 22px">' +
+        '<a href="' + registry + '" style="color:' + beige + ';text-decoration:none;font-family:monospace;font-size:14px;letter-spacing:1px">REGISTER YOUR GARDEN &rarr;</a>' +
+      '</td></tr></table>' +
     '</td></tr>' +
 
     '<tr><td style="padding:22px 4px;color:' + ink + ';font-size:12px;line-height:1.7;border-top:1px solid ' + brass + '">' +
