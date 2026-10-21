@@ -90,6 +90,7 @@ function fulfilRow_(sh, col, row, alerted) {
   if (v[col.status - 1] !== 'CONFIRMED') return 'skip';
   if (v[col.sentAt - 1] || v[col.draftedAt - 1]) return 'done';  // re-clicked confirm, etc.
   if (!sub.email || !sub.token || !sub.code) return 'skip';
+  if (String(v[col.page - 1]) === '/backend-test') return 'skip';
 
   // Mixed polygons come through as "12.1.1/12.3.6" (dominant first). Prefer a list curated for
   // the exact mix; otherwise fall back to the dominant community's list.
@@ -104,6 +105,13 @@ function fulfilRow_(sh, col, row, alerted) {
       if (!alerted[key]) { notifyNeedsList_(sub, key); alerted[key] = true; }
     }
     return 'needs-list';
+  }
+
+  // Lists sent by hand before automation (or by a previous run that failed to stamp) live in
+  // Sent mail, not the sheet. Check there so nobody gets the same list twice.
+  if (sentBefore_(sub.email, list.vegTitle)) {
+    stampSiblings_(sh, col, sub, 'sentAt');
+    return 'already-sent';
   }
 
   var mail = composeList_(list, sub);
@@ -140,10 +148,17 @@ function fetchList_(key) {
   }
 }
 
+function sentBefore_(email, vegTitle) {
+  var words = String(vegTitle || '').split(/[^A-Za-z]+/).filter(function (w) { return w.length > 3; });
+  var q = 'in:sent to:' + email + ' subject:"indigenous planting list"' +
+          words.map(function (w) { return ' subject:' + w; }).join('');
+  return GmailApp.search(q, 0, 1).length > 0;
+}
+
 /* ---------- sheet helpers ---------- */
 
 function cols_(sh) {
-  var need = ['timestamp','email','status','token','address','state','system','code','name',
+  var need = ['timestamp','email','status','token','address','state','system','code','name','page',
               'confirmedAt','unsubscribedAt','sentAt','draftedAt','needsListAt'];
   var out = {};
   need.forEach(function (n) { out[n] = ensureColumn_(sh, n); });
