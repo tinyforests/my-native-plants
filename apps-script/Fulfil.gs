@@ -224,12 +224,15 @@ function composeList_(list, sub) {
   };
 }
 
-/** "Norseman Street, East Victoria Park, Perth WA 6101" -> "East Victoria Park". */
+/** "Norseman Street, East Victoria Park, Perth WA 6101" -> "East Victoria Park"; "Moulamein, New South Wales" -> "Moulamein". */
 function shortPlace_(address) {
-  var parts = String(address || '').split(',').map(function (s) { return s.trim(); })
-    .filter(function (s) { return s && !/^\d/.test(s) && !/\b(VIC|NSW|QLD|WA|SA|TAS|NT|ACT)\b/.test(s) &&
-                                    !/Australia/i.test(s); });
-  if (parts.length >= 2) return parts[1];
+  var STATES = /^(VIC|NSW|QLD|WA|SA|TAS|NT|ACT|Victoria|New South Wales|Queensland|Western Australia|South Australia|Tasmania|Northern Territory|Australian Capital Territory|Australia)$/i;
+  var STREET = /\b(St|Street|Rd|Road|Ave|Avenue|Ct|Court|Cres|Crescent|Dr|Drive|Pl|Place|Pde|Parade|Bvd|Blvd|Boulevard|Hwy|Highway|Ln|Lane|Tce|Terrace|Way|Cl|Close|Gr|Grove|Cct|Circuit)\b\.?$/i;
+  var parts = String(address || '').split(',').map(function (s) {
+      return s.trim().replace(/\s+(VIC|NSW|QLD|WA|SA|TAS|NT|ACT)(\s+\d{4})?$/i, '').replace(/\s+\d{4}$/, '');
+    })
+    .filter(function (s) { return s && !/^\d+$/.test(s) && !STATES.test(s); });
+  if (parts.length && STREET.test(parts[0])) parts.shift();
   return parts[0] || '';
 }
 

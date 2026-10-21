@@ -56,22 +56,31 @@ function findRowByToken_(sh, token) {
   return -1;
 }
 
-/** Web app entry — subscribe (POST). */
+/** Web app entry — subscribe (POST from the site) or confirm (POST from the confirm button). */
 function doPost(e) {
+  var p = (e && e.parameter) || {};
+  if (p.action === 'confirm' && p.token) return confirm_(p.token);
+
+  // Serialise subscribes: near-simultaneous duplicate POSTs otherwise all miss each other's rows.
+  var lock = LockService.getScriptLock();
+  try { lock.waitLock(15000); } catch (e2) { return json_({ ok: false, error: 'busy' }); }
   try {
-    var p = (e && e.parameter) || {};
     var email = String(p.email || '').trim().toLowerCase();
     if (!email || email.indexOf('@') < 1) return json_({ ok: false, error: 'invalid email' });
     if (String(p.consent) !== 'true') return json_({ ok: false, error: 'consent required' });
 
     var sh = sheet_();
 
-    // Resubmits (e.g. "the confirm email hasn't arrived yet") reuse the open PENDING row
-    // for the same person + community instead of piling up new rows and tokens.
-    var existing = findPending_(sh, email, p.system, p.code);
+    // Resubmits reuse the existing row for the same person + community instead of piling up
+    // new rows, tokens and confirmation emails.
+    var existing = findExisting_(sh, email, p.system, p.code);
+    if (existing && existing.status === 'CONFIRMED') {
+      return json_({ ok: true, status: 'confirmed' });           // already on the list
+    }
     if (existing) {
-      sendConfirmationEmail_(email, existing, p);
-      return json_({ ok: true, status: 'pending', resent: true });
+      var ageMin = (Date.now() - existing.ts) / 60000;
+      if (ageMin >= 2) sendConfirmationEmail_(email, existing.token, p);  // "it hasn't arrived"
+      return json_({ ok: true, status: 'pending', resent: ageMin >= 2 });
     }
 
     var token = Utilities.getUuid();
@@ -85,6 +94,8 @@ function doPost(e) {
     return json_({ ok: true, status: 'pending' });
   } catch (err) {
     return json_({ ok: false, error: String(err) });
+  } finally {
+    lock.releaseLock();
   }
 }
 
@@ -98,12 +109,11 @@ function doGet(e) {
     var row = findRowByToken_(sh, token);
     if (row > 0) {
       if (action === 'confirm') {
-        var already = sh.getRange(row, 3).getValue() === 'CONFIRMED';
-        sh.getRange(row, 3).setValue('CONFIRMED');
-        if (!already) sh.getRange(row, 14).setValue(new Date());
-        // Serve the planting list straight away if we have one (see Fulfil.gs).
-        if (typeof fulfil_ === 'function') fulfil_(row);
-        return redirect_(CONFIG.CONFIRM_REDIRECT);
+        // Don't confirm on the GET: corporate mail scanners (e.g. Microsoft Safe Links) open every
+        // link the moment an email lands, which would confirm people who never clicked. A human
+        // presses the button, which POSTs back here (doPost -> confirm_).
+        if (sh.getRange(row, 3).getValue() === 'CONFIRMED') return redirect_(CONFIG.CONFIRM_REDIRECT);
+        return confirmPage_(token);
       } else {
         sh.getRange(row, 3).setValue('UNSUBSCRIBED');
         sh.getRange(row, 15).setValue(new Date());
@@ -113,6 +123,40 @@ function doGet(e) {
   }
   // Unknown / expired token — send them somewhere sensible.
   return redirect_(CONFIG.SITE + '/');
+}
+
+function confirm_(token) {
+  var sh = sheet_();
+  var row = findRowByToken_(sh, token);
+  if (row < 0) return redirect_(CONFIG.SITE + '/');
+  var status = sh.getRange(row, 3).getValue();
+  if (status === 'UNSUBSCRIBED') return redirect_(CONFIG.UNSUB_REDIRECT);
+  if (status !== 'CONFIRMED') {
+    sh.getRange(row, 3).setValue('CONFIRMED');
+    sh.getRange(row, 14).setValue(new Date());
+  }
+  // Serve the planting list straight away if we have one (see Fulfil.gs).
+  if (typeof fulfil_ === 'function') fulfil_(row);
+  return redirect_(CONFIG.CONFIRM_REDIRECT);
+}
+
+function confirmPage_(token) {
+  var url = ScriptApp.getService().getUrl();
+  return HtmlService.createHtmlOutput(
+    '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<div style="font-family:Georgia,serif;color:#2b3126;max-width:460px;margin:48px auto;padding:0 20px;line-height:1.6">' +
+    '<p style="font-family:monospace;font-size:12px;letter-spacing:2px;color:#3d4535">FIND MY NATIVE PLANTS</p>' +
+    '<h1 style="font-weight:normal;font-size:26px;color:#3d4535;margin:6px 0 10px">One last step</h1>' +
+    '<p>Press the button to confirm your email and get your indigenous planting list.</p>' +
+    '<form method="post" action="' + url + '" target="_top">' +
+    '<input type="hidden" name="action" value="confirm">' +
+    '<input type="hidden" name="token" value="' + escapeHtml_(token) + '">' +
+    '<button type="submit" style="background:#3d4535;color:#fff0dc;border:0;padding:14px 24px;' +
+    'font-family:monospace;font-size:15px;letter-spacing:1px;cursor:pointer">CONFIRM MY EMAIL &rarr;</button>' +
+    '</form>' +
+    '<p style="font-size:13px;color:#5e6356;margin-top:22px">Didn\u2019t ask for this? Close this page and nothing further will be sent.</p>' +
+    '</div>'
+  ).setTitle('Confirm — Find My Native Plants');
 }
 
 function sendConfirmationEmail_(email, token, p) {
@@ -150,14 +194,17 @@ function unsubscribeUrl(token) {
   return ScriptApp.getService().getUrl() + '?action=unsubscribe&token=' + encodeURIComponent(token);
 }
 
-function findPending_(sh, email, system, code) {
+/** Latest row for this person + community: CONFIRMED (any age) or PENDING (last 48h). */
+function findExisting_(sh, email, system, code) {
   var data = sh.getDataRange().getValues();
   var cutoff = Date.now() - 48 * 3600 * 1000;
   for (var i = data.length - 1; i >= 1; i--) {
     var r = data[i];
-    if (String(r[1]).toLowerCase() === email && r[2] === 'PENDING' &&
-        String(r[6]) === String(system || '') && String(r[7]) === String(code || '') &&
-        new Date(r[0]).getTime() > cutoff) return String(r[3]);
+    if (String(r[1]).toLowerCase() !== email) continue;
+    if (String(r[6]) !== String(system || '') || String(r[7]) !== String(code || '')) continue;
+    var ts = new Date(r[0]).getTime();
+    if (r[2] === 'CONFIRMED') return { token: String(r[3]), status: 'CONFIRMED', ts: ts };
+    if (r[2] === 'PENDING' && ts > cutoff) return { token: String(r[3]), status: 'PENDING', ts: ts };
   }
   return null;
 }
