@@ -1,0 +1,194 @@
+{
+  "system": "PCT",
+  "code": "2",
+  "reviewed": true,
+  "reviewedBy": "Tyson Lundbech",
+  "reviewedAt": "2026-10-21",
+  "vegTitle": "River Red Gum–Sedge Forest",
+  "vegSub": "PCT 2 · River Red Gum–sedge very tall open forest in frequently flooded forest wetland · Riverina, south-western NSW",
+  "intro": "Before 1750 your address stood in very tall River Red Gum forest on the frequently flooded floodplain around Moulamein — trees often thirty metres high and more, lining channels, billabongs and low backplains that filled with each flood. Shrubs are naturally sparse here; the life of the forest floor is a carpet of sedges, rushes, flood-loving grasses and wildflowers that wake each time the water arrives. It is nesting country for waterbirds, and it has been assessed as Vulnerable, with dieback since 2000. The plants below are indigenous to this community and its higher, drier edges, grouped by the layer they fill. Plant the canopy first; the sedges and herbs belong in the damp ground beneath it.",
+  "sources": [
+    "Benson et al., NSW Vegetation Classification and Assessment — ID 2 (Cunninghamia)",
+    "Goulburn Broken CMA Murray Fans revegetation species lists (Riverine Swamp, Sedgy Riverine and Grassy Riverine Forest)"
+  ],
+  "layers": [
+    {
+      "layer": "Canopy trees",
+      "note": "The framework — plant these first.",
+      "plants": [
+        [
+          "Eucalyptus camaldulensis subsp. camaldulensis",
+          "River Red Gum"
+        ],
+        [
+          "Eucalyptus largiflorens",
+          "Black Box (higher, less-flooded edges)"
+        ]
+      ]
+    },
+    {
+      "layer": "Small trees & shrubs",
+      "note": "Naturally sparse in the wettest forest — use them on the edges.",
+      "plants": [
+        [
+          "Acacia stenophylla",
+          "River Cooba"
+        ],
+        [
+          "Acacia salicina",
+          "Cooba"
+        ],
+        [
+          "Muehlenbeckia florulenta",
+          "Tangled Lignum (wetter hollows)"
+        ],
+        [
+          "Rhagodia spinescens",
+          "Thorny Saltbush"
+        ]
+      ]
+    },
+    {
+      "layer": "Wildflowers, lilies & groundcovers",
+      "note": "",
+      "plants": [
+        [
+          "Calostemma purpureum",
+          "Garland Lily"
+        ],
+        [
+          "Wahlenbergia fluminalis",
+          "River Bluebell"
+        ],
+        [
+          "Brachyscome basaltica",
+          "Swamp Daisy"
+        ],
+        [
+          "Calotis scapigera",
+          "Tufted Burr-daisy"
+        ],
+        [
+          "Centipeda cunninghamii",
+          "Common Sneezeweed"
+        ],
+        [
+          "Senecio quadridentatus",
+          "Cotton Fireweed"
+        ],
+        [
+          "Eclipta platyglossa",
+          "Yellow Twin-heads"
+        ],
+        [
+          "Ranunculus inundatus",
+          "River Buttercup"
+        ],
+        [
+          "Persicaria prostrata",
+          "Creeping Knotweed"
+        ],
+        [
+          "Rumex brownii",
+          "Slender Dock"
+        ],
+        [
+          "Stellaria angustifolia",
+          "Swamp Starwort"
+        ],
+        [
+          "Lobelia concolor",
+          "Poison Pratia"
+        ],
+        [
+          "Dichondra repens",
+          "Kidney Weed"
+        ],
+        [
+          "Einadia nutans",
+          "Climbing Saltbush"
+        ],
+        [
+          "Marsilea drummondii",
+          "Common Nardoo"
+        ]
+      ]
+    },
+    {
+      "layer": "Sedges, rushes & grasses",
+      "note": "The ground layer that defines this forest.",
+      "plants": [
+        [
+          "Eleocharis acuta",
+          "Common Spike-sedge"
+        ],
+        [
+          "Carex tereticaulis",
+          "Basket Sedge"
+        ],
+        [
+          "Carex inversa",
+          "Knob Sedge"
+        ],
+        [
+          "Carex appressa",
+          "Tall Sedge"
+        ],
+        [
+          "Cyperus gymnocaulos",
+          "Spiny Flat-sedge"
+        ],
+        [
+          "Juncus amabilis",
+          "Hollow Rush"
+        ],
+        [
+          "Juncus flavidus",
+          "Gold Rush"
+        ],
+        [
+          "Pseudoraphis spinescens",
+          "Moira Grass"
+        ],
+        [
+          "Paspalidium jubiflorum",
+          "Warrego Summer-grass"
+        ],
+        [
+          "Amphibromus nervosus",
+          "Common Swamp Wallaby-grass"
+        ],
+        [
+          "Lachnagrostis filiformis",
+          "Common Blown-grass"
+        ],
+        [
+          "Cynodon dactylon var. pulchellus",
+          "Native Couch"
+        ],
+        [
+          "Poa labillardierei",
+          "Common Tussock-grass"
+        ]
+      ]
+    },
+    {
+      "layer": "Water plants",
+      "note": "For a dam, billabong edge or wetland.",
+      "plants": [
+        [
+          "Cycnogeton procerum",
+          "Water Ribbons"
+        ],
+        [
+          "Myriophyllum crispatum",
+          "Upright Water-milfoil"
+        ],
+        [
+          "Ottelia ovalifolia",
+          "Swamp Lily"
+        ]
+      ]
+    }
+  ]
+}

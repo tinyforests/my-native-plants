@@ -1,0 +1,195 @@
+{
+  "system": "PCT",
+  "code": "3433",
+  "reviewed": true,
+  "reviewedBy": "Tyson Lundbech",
+  "reviewedAt": "2026-09-27",
+  "vegTitle": "Spotted Gum – Ironbark Forest",
+  "vegSub": "PCT 3433 · Lower Hunter Spotted Gum–Ironbark Forest (an Endangered Ecological Community) · Sydney Basin / NSW North Coast",
+  "intro": "Before 1750 your address stood in grassy open forest of Spotted Gum and Broad-leaved Ironbark over a rich grassy, shrubby understorey, on the low foothills of the Lower Hunter. It is one of the most heavily cleared forests in the state — now a listed Endangered Ecological Community — so replanting it here genuinely matters. The plants below are indigenous to this exact community and grouped by the layer they fill. Plant the canopy first; the wildflowers, mat-rushes and grasses belong in the light beneath it.",
+  "sources": [
+    "NSW BioNet PCT 3433"
+  ],
+  "layers": [
+    {
+      "layer": "Canopy trees",
+      "note": "The framework — plant these first.",
+      "plants": [
+        [
+          "Corymbia maculata",
+          "Spotted Gum"
+        ],
+        [
+          "Eucalyptus fibrosa",
+          "Broad-leaved Ironbark"
+        ],
+        [
+          "Eucalyptus punctata",
+          "Grey Gum"
+        ],
+        [
+          "Eucalyptus tereticornis",
+          "Forest Red Gum"
+        ]
+      ]
+    },
+    {
+      "layer": "Small trees & tall shrubs",
+      "note": "",
+      "plants": [
+        [
+          "Acacia parvipinnula",
+          "Silver-stemmed Wattle"
+        ],
+        [
+          "Melaleuca decora",
+          "White Feather Honeymyrtle"
+        ],
+        [
+          "Melaleuca nodosa",
+          "Prickly-leaved Paperbark"
+        ],
+        [
+          "Denhamia silvestris",
+          "Narrow-leaved Orangebark"
+        ],
+        [
+          "Persoonia linearis",
+          "Narrow-leaved Geebung"
+        ]
+      ]
+    },
+    {
+      "layer": "Shrubs",
+      "note": "",
+      "plants": [
+        [
+          "Bursaria spinosa",
+          "Sweet Bursaria"
+        ],
+        [
+          "Daviesia ulicifolia",
+          "Gorse Bitter Pea"
+        ],
+        [
+          "Callistemon linearifolius",
+          "Netted Bottlebrush"
+        ],
+        [
+          "Leptospermum parvifolium",
+          "Small-leaved Tea-tree"
+        ],
+        [
+          "Grevillea montana",
+          "Mountain Grevillea"
+        ],
+        [
+          "Grevillea parviflora subsp. parviflora",
+          "Small-flower Grevillea"
+        ],
+        [
+          "Correa reflexa",
+          "Common Correa"
+        ],
+        [
+          "Lissanthe strigosa",
+          "Peach Heath"
+        ],
+        [
+          "Ozothamnus diosmifolius",
+          "Rice Flower"
+        ]
+      ]
+    },
+    {
+      "layer": "Climbers",
+      "note": "",
+      "plants": [
+        [
+          "Hardenbergia violacea",
+          "Purple Coral Pea"
+        ],
+        [
+          "Billardiera scandens",
+          "Common Apple Berry"
+        ],
+        [
+          "Glycine clandestina",
+          "Twining Glycine"
+        ],
+        [
+          "Eustrephus latifolius",
+          "Wombat Berry"
+        ]
+      ]
+    },
+    {
+      "layer": "Groundcovers, herbs & wildflowers",
+      "note": "",
+      "plants": [
+        [
+          "Goodenia rotundifolia",
+          "Round-leaved Goodenia"
+        ],
+        [
+          "Opercularia diphylla",
+          "Stinkweed"
+        ],
+        [
+          "Macrozamia flexuosa",
+          "Weeping Zamia"
+        ],
+        [
+          "Cheilanthes sieberi subsp. sieberi",
+          "Poison Rock Fern"
+        ]
+      ]
+    },
+    {
+      "layer": "Sedges, rushes, lilies & grasses",
+      "note": "The ground layer that ties it together.",
+      "plants": [
+        [
+          "Themeda triandra",
+          "Kangaroo Grass"
+        ],
+        [
+          "Microlaena stipoides",
+          "Weeping Grass"
+        ],
+        [
+          "Aristida vagans",
+          "Threeawn Speargrass"
+        ],
+        [
+          "Entolasia stricta",
+          "Wiry Panic"
+        ],
+        [
+          "Dichelachne micrantha",
+          "Shorthair Plumegrass"
+        ],
+        [
+          "Eragrostis brownii",
+          "Brown's Lovegrass"
+        ],
+        [
+          "Lepidosperma laterale",
+          "Variable Sword-sedge"
+        ],
+        [
+          "Dianella revoluta var. revoluta",
+          "Blue Flax-lily"
+        ],
+        [
+          "Lomandra filiformis",
+          "Wattle Mat-rush"
+        ],
+        [
+          "Lomandra multiflora",
+          "Many-flowered Mat-rush"
+        ]
+      ]
+    }
+  ]
+}
