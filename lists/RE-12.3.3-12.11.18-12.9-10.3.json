@@ -1,0 +1,257 @@
+{
+  "system": "RE",
+  "code": "12.3.3/12.11.18/12.9-10.3",
+  "reviewed": false,
+  "reviewedBy": "",
+  "reviewedAt": "",
+  "vegTitle": "Blue Gum & Gum-topped Box Woodland",
+  "vegSub": "Regional Ecosystems 12.3.3 / 12.11.18 / 12.9-10.3 · Queensland Blue Gum woodland on alluvial plains, with Gum-topped Box forest on the rises (12.3.3 Endangered) · South-east Queensland",
+  "intro": "Before 1750 your address at Gin Gin stood in tall Queensland Blue Gum woodland on the creek flats and alluvial plains, rising into Gum-topped Box and ironbark forest on the low hills around it. The gums grew in stands from dense forest to open parkland over a rich, grassy floor of Kangaroo Grass, bluegrasses and wildflowers, with few shrubs. The Blue Gum woodland is one of the most heavily cleared communities in South-east Queensland and is now listed as Endangered; it is koala food country, and its old hollow-bearing trees shelter gliders, bats and birds. The plants below are indigenous to these communities and grouped by the layer they fill. Plant the canopy first; the grasses, lilies and herbs belong in the open light beneath it.",
+  "sources": [
+    "Healthy Land & Water / Land for Wildlife SEQ — RE 12.3.3 fact sheet",
+    "Moreton Bay Regional Council — RE 12.11.18 species list",
+    "Queensland Herbarium RE descriptions (12.9-10.3)"
+  ],
+  "layers": [
+    {
+      "layer": "Canopy trees",
+      "note": "The framework — plant these first. Blue Gum and Gum-topped Box are preferred koala food trees.",
+      "plants": [
+        [
+          "Eucalyptus tereticornis",
+          "Queensland Blue Gum"
+        ],
+        [
+          "Eucalyptus moluccana",
+          "Gum-topped Box"
+        ],
+        [
+          "Eucalyptus crebra",
+          "Narrow-leaved Ironbark"
+        ],
+        [
+          "Eucalyptus melanophloia",
+          "Silver-leaved Ironbark"
+        ],
+        [
+          "Eucalyptus fibrosa",
+          "Broad-leaved Ironbark (rises)"
+        ],
+        [
+          "Corymbia citriodora",
+          "Spotted Gum (rises)"
+        ],
+        [
+          "Corymbia tessellaris",
+          "Moreton Bay Ash"
+        ],
+        [
+          "Corymbia intermedia",
+          "Pink Bloodwood"
+        ],
+        [
+          "Angophora subvelutina",
+          "Broad-leaved Apple"
+        ],
+        [
+          "Angophora floribunda",
+          "Rough-barked Apple"
+        ],
+        [
+          "Lophostemon suaveolens",
+          "Swamp Box (damper ground)"
+        ]
+      ]
+    },
+    {
+      "layer": "Small trees & tall shrubs",
+      "note": "",
+      "plants": [
+        [
+          "Acacia disparrima",
+          "Hickory Wattle"
+        ],
+        [
+          "Acacia salicina",
+          "Sally Wattle"
+        ],
+        [
+          "Acacia concurrens",
+          "Black Wattle"
+        ],
+        [
+          "Acacia leiocalyx",
+          "Early Black Wattle"
+        ],
+        [
+          "Alphitonia excelsa",
+          "Soap Tree"
+        ],
+        [
+          "Mallotus philippensis",
+          "Red Kamala"
+        ],
+        [
+          "Melaleuca viminalis",
+          "Weeping Bottlebrush (creek banks)"
+        ],
+        [
+          "Ficus coronata",
+          "Creek Sandpaper Fig (creek banks)"
+        ],
+        [
+          "Trema tomentosa",
+          "Native Peach"
+        ],
+        [
+          "Xanthorrhoea glauca",
+          "Blue-leaved Grass Tree"
+        ]
+      ]
+    },
+    {
+      "layer": "Shrubs",
+      "note": "Naturally few — the grassy floor matters more.",
+      "plants": [
+        [
+          "Acacia fimbriata",
+          "Brisbane Golden Wattle"
+        ],
+        [
+          "Choretrum candollei",
+          "White Sour Bush"
+        ],
+        [
+          "Acrotriche aggregata",
+          "Ground Berry"
+        ],
+        [
+          "Eremophila debilis",
+          "Amulla"
+        ]
+      ]
+    },
+    {
+      "layer": "Climbers",
+      "note": "",
+      "plants": [
+        [
+          "Parsonsia straminea",
+          "Monkey Rope"
+        ],
+        [
+          "Pandorea pandorana",
+          "Wonga Vine"
+        ],
+        [
+          "Hardenbergia violacea",
+          "Purple Coral Pea"
+        ],
+        [
+          "Glycine tomentella",
+          "Woolly Glycine"
+        ]
+      ]
+    },
+    {
+      "layer": "Lilies, wildflowers & ferns",
+      "note": "",
+      "plants": [
+        [
+          "Crinum flaccidum",
+          "Darling Lily"
+        ],
+        [
+          "Thysanotus tuberosus",
+          "Common Fringe Lily"
+        ],
+        [
+          "Dianella longifolia",
+          "Pale Flax-lily"
+        ],
+        [
+          "Lomandra hystrix",
+          "Creek Mat-rush"
+        ],
+        [
+          "Goodenia rotundifolia",
+          "Round-leaved Goodenia"
+        ],
+        [
+          "Dichondra repens",
+          "Kidney Weed"
+        ],
+        [
+          "Cheilanthes sieberi",
+          "Mulga Fern"
+        ]
+      ]
+    },
+    {
+      "layer": "Grasses, sedges & rushes",
+      "note": "The ground layer that ties it together.",
+      "plants": [
+        [
+          "Themeda triandra",
+          "Kangaroo Grass"
+        ],
+        [
+          "Dichanthium sericeum",
+          "Queensland Bluegrass"
+        ],
+        [
+          "Bothriochloa bladhii",
+          "Forest Bluegrass"
+        ],
+        [
+          "Heteropogon contortus",
+          "Black Speargrass"
+        ],
+        [
+          "Capillipedium spicigerum",
+          "Scented-top Grass"
+        ],
+        [
+          "Panicum decompositum",
+          "Native Millet"
+        ],
+        [
+          "Sorghum leiocladum",
+          "Native Sorghum"
+        ],
+        [
+          "Chloris divaricata",
+          "Slender Chloris"
+        ],
+        [
+          "Alloteropsis semialata",
+          "Cockatoo Grass"
+        ],
+        [
+          "Cymbopogon refractus",
+          "Barbed-wire Grass"
+        ],
+        [
+          "Eragrostis brownii",
+          "Brown's Lovegrass"
+        ],
+        [
+          "Imperata cylindrica",
+          "Blady Grass"
+        ],
+        [
+          "Lepidosperma laterale",
+          "Variable Sword-sedge"
+        ],
+        [
+          "Cyperus polystachyos",
+          "Bunchy Sedge"
+        ],
+        [
+          "Juncus usitatus",
+          "Common Rush"
+        ]
+      ]
+    }
+  ]
+}
