@@ -116,14 +116,12 @@ function fulfilRow_(sh, col, row, alerted) {
 
   var mail = composeList_(list, sub);
   if (list.reviewed && FULFIL.AUTO_SEND_REVIEWED) {
-    MailApp.sendEmail({ to: sub.email, subject: mail.subject, htmlBody: mail.html,
-                        body: mail.text, name: CONFIG.FROM_NAME });
+    sendAsGS_(sub.email, mail.subject, mail.text, { htmlBody: mail.html });
     stampSiblings_(sh, col, sub, 'sentAt');
     return 'sent';
   }
 
-  GmailApp.createDraft(sub.email, mail.subject, mail.text,
-                       { htmlBody: mail.html, name: CONFIG.FROM_NAME });
+  GmailApp.createDraft(sub.email, mail.subject, mail.text, gsOpts_({ htmlBody: mail.html }));
   stampSiblings_(sh, col, sub, 'draftedAt');
   notifyDraft_(sub, key, mail.subject);
   return 'drafted';
@@ -197,32 +195,24 @@ function notifyNeedsList_(sub, key) {
     RE: 'https://apps.des.qld.gov.au/regional-ecosystems/details/?re=' + encodeURIComponent(sub.code),
     PCT: 'https://vegetation.bionet.nsw.gov.au/'
   }[sub.system] || '';
-  MailApp.sendEmail({
-    to: FULFIL.ADMIN,
-    subject: 'FMNP: list needed — ' + sub.system + ' ' + sub.code + (sub.state ? ' (' + sub.state + ')' : ''),
-    name: 'FMNP fulfilment',
-    body:
+  sendAsGS_(FULFIL.ADMIN, 'FMNP: list needed — ' + sub.system + ' ' + sub.code + (sub.state ? ' (' + sub.state + ')' : ''),
       'A confirmed subscriber is waiting on a planting list we don\'t have yet.\n\n' +
       'Community: ' + sub.system + ' ' + sub.code + (sub.name ? ' — ' + sub.name : '') + '\n' +
       'Address:   ' + (sub.address || '(none)') + '\n' +
       (lookup ? 'Reference: ' + lookup + '\n' : '') +
       '\nAdd lists/' + key + '.json to the repo (copy an existing list for the shape).\n' +
       'Set "reviewed": true once you\'re happy and it sends automatically to everyone waiting\n' +
-      '(within 15 min of the push going live). Leave it false to get a draft to check first.\n'
-  });
+      '(within 15 min of the push going live). Leave it false to get a draft to check first.\n',
+    { name: 'FMNP fulfilment' });
 }
 
 function notifyDraft_(sub, key, subject) {
-  MailApp.sendEmail({
-    to: FULFIL.ADMIN,
-    subject: 'FMNP: draft ready to check — ' + sub.system + ' ' + sub.code,
-    name: 'FMNP fulfilment',
-    body:
+  sendAsGS_(FULFIL.ADMIN, 'FMNP: draft ready to check — ' + sub.system + ' ' + sub.code,
       'A planting-list draft is in Gmail Drafts: "' + subject + '"\n' +
       'To: ' + sub.email + '\nAddress: ' + (sub.address || '(none)') + '\n\n' +
       'The list (lists/' + key + '.json) isn\'t marked reviewed yet. Check it, send the draft,\n' +
-      'then set "reviewed": true so future requests for this community send themselves.\n'
-  });
+      'then set "reviewed": true so future requests for this community send themselves.\n',
+    { name: 'FMNP fulfilment' });
 }
 
 /* ---------- email ---------- */

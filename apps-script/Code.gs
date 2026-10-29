@@ -19,7 +19,10 @@
  *   5. First run will prompt for authorisation (Sheets + send email as you). Approve.
  *
  * Notes
- *   - MailApp sends from the Google account that owns the script. Set FROM_NAME so the
+ *   - Every email goes out FROM hello@gardenerandson.com (CONFIG.FROM_EMAIL) via GmailApp. That
+ *     address must be a verified "Send mail as" alias on the script owner's Gmail, or sends stop
+ *     with an error rather than going out from the owner's own address.
+ *   - (old note) MailApp sends from the Google account that owns the script. Set FROM_NAME so the
  *     display name reads "Gardener & Son", and consider a Gmail "Send mail as" alias if
  *     you want a branded from-address.
  *   - Apps Script web apps can't return a real 302, so confirm/unsubscribe return a tiny
@@ -33,7 +36,8 @@ var CONFIG = {
   SITE: 'https://findmynativeplants.com.au',
   CONFIRM_REDIRECT: 'https://findmynativeplants.com.au/confirmed/',
   UNSUB_REDIRECT: 'https://findmynativeplants.com.au/unsubscribed/',
-  FROM_NAME: 'Gardener & Son — Find My Native Plants',
+  FROM_EMAIL: 'hello@gardenerandson.com',
+  FROM_NAME: 'Gardener & Son',
   STUDIO: 'Gardener & Son · 2 Churchill Street, Mont Albert VIC 3127'
 };
 
@@ -183,7 +187,7 @@ function sendConfirmationEmail_(email, token, p) {
     '<p style="font-size:12px;color:#6b6f63">' + escapeHtml_(CONFIG.FROM_NAME) + '<br>' +
     escapeHtml_(CONFIG.STUDIO) + '<br><a href="' + CONFIG.SITE + '">' + CONFIG.SITE + '</a></p></div>';
 
-  MailApp.sendEmail({ to: email, subject: subject, body: body, htmlBody: html, name: CONFIG.FROM_NAME });
+  sendAsGS_(email, subject, body, { htmlBody: html });
 }
 
 /**
@@ -207,6 +211,24 @@ function findExisting_(sh, email, system, code) {
     if (r[2] === 'PENDING' && ts > cutoff) return { token: String(r[3]), status: 'PENDING', ts: ts };
   }
   return null;
+}
+
+/** Send from hello@gardenerandson.com — never from the script owner's own address. */
+function sendAsGS_(to, subject, body, opts) {
+  GmailApp.sendEmail(to, subject, body, gsOpts_(opts));
+}
+
+function gsOpts_(opts) {
+  var aliases = GmailApp.getAliases();
+  if (aliases.indexOf(CONFIG.FROM_EMAIL) === -1) {
+    throw new Error(CONFIG.FROM_EMAIL + ' is not a Send-mail-as alias on this account; refusing to send from ' +
+                    Session.getEffectiveUser().getEmail());
+  }
+  var o = {}; for (var k in (opts || {})) o[k] = opts[k];
+  o.from = CONFIG.FROM_EMAIL;
+  o.name = o.name || CONFIG.FROM_NAME;
+  o.replyTo = CONFIG.FROM_EMAIL;
+  return o;
 }
 
 function redirect_(url) {
