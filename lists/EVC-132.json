@@ -1,0 +1,213 @@
+{
+  "system": "EVC",
+  "code": "132",
+  "reviewed": false,
+  "reviewedBy": "",
+  "reviewedAt": "",
+  "vegTitle": "Western Plains Grassland",
+  "vegSub": "MVS 36 · Temperate tussock grassland · in Victoria's terms, Plains Grassland (EVC 132), Victorian Volcanic Plain",
+  "intro": "Before 1750 your address on Kurweeton Road, in the shadow of Mount Elephant, stood in open, almost treeless grassland on the basalt plains of the Western District: a sea of Kangaroo Grass, tussock and wallaby grasses, threaded with lilies, daisies and Murnong that flowered in waves through spring. Trees grew only along drainage lines and on the stony rises. These grasslands are among the most cleared ecosystems in Australia and are listed nationally as Critically Endangered (Natural Temperate Grassland of the Victorian Volcanic Plain), so even a small patch brought back genuinely matters. The plants below are indigenous to this grassland and grouped by the layer they fill. Here the grasses are the framework; plant them first and let the wildflowers live between the tussocks.",
+  "sources": [
+    "Hand-written for FMNP requests, Nov 2026 — generalise the place-specific intro before marking reviewed"
+  ],
+  "layers": [
+    {
+      "layer": "Grasses",
+      "note": "The framework of a grassland — plant these first.",
+      "plants": [
+        [
+          "Themeda triandra",
+          "Kangaroo Grass"
+        ],
+        [
+          "Poa labillardierei",
+          "Common Tussock-grass"
+        ],
+        [
+          "Rytidosperma duttonianum",
+          "Brown-back Wallaby-grass"
+        ],
+        [
+          "Rytidosperma setaceum",
+          "Bristly Wallaby-grass"
+        ],
+        [
+          "Austrostipa bigeniculata",
+          "Kneed Spear-grass"
+        ],
+        [
+          "Austrostipa scabra",
+          "Rough Spear-grass"
+        ],
+        [
+          "Elymus scaber",
+          "Common Wheat-grass"
+        ],
+        [
+          "Bothriochloa macra",
+          "Red-leg Grass"
+        ],
+        [
+          "Dichelachne crinita",
+          "Long-hair Plume-grass"
+        ]
+      ]
+    },
+    {
+      "layer": "Lilies & tufting plants",
+      "note": "",
+      "plants": [
+        [
+          "Arthropodium strictum",
+          "Chocolate Lily"
+        ],
+        [
+          "Bulbine bulbosa",
+          "Bulbine Lily"
+        ],
+        [
+          "Burchardia umbellata",
+          "Milkmaids"
+        ],
+        [
+          "Wurmbea dioica",
+          "Early Nancy"
+        ],
+        [
+          "Tricoryne elatior",
+          "Yellow Rush-lily"
+        ],
+        [
+          "Dianella admixta",
+          "Black-anther Flax-lily"
+        ],
+        [
+          "Lomandra filiformis",
+          "Wattle Mat-rush"
+        ],
+        [
+          "Carex breviculmis",
+          "Common Grass-sedge"
+        ]
+      ]
+    },
+    {
+      "layer": "Daisies & wildflowers",
+      "note": "The spring display between the tussocks.",
+      "plants": [
+        [
+          "Microseris walteri",
+          "Murnong (Yam Daisy)"
+        ],
+        [
+          "Leptorhynchos squamatus",
+          "Scaly Buttons"
+        ],
+        [
+          "Craspedia variabilis",
+          "Common Billy-buttons"
+        ],
+        [
+          "Chrysocephalum apiculatum",
+          "Common Everlasting"
+        ],
+        [
+          "Calocephalus citreus",
+          "Lemon Beauty-heads"
+        ],
+        [
+          "Brachyscome dentata",
+          "Lobe-seed Daisy"
+        ],
+        [
+          "Vittadinia gracilis",
+          "Woolly New Holland Daisy"
+        ],
+        [
+          "Calotis scabiosifolia",
+          "Rough Burr-daisy"
+        ],
+        [
+          "Eryngium ovinum",
+          "Blue Devil"
+        ],
+        [
+          "Ptilotus spathulatus",
+          "Pussy-tails"
+        ],
+        [
+          "Pelargonium rodneyanum",
+          "Magenta Stork's-bill"
+        ],
+        [
+          "Velleia paradoxa",
+          "Spur Velleia"
+        ],
+        [
+          "Wahlenbergia communis",
+          "Tufted Bluebell"
+        ],
+        [
+          "Goodenia pinnatifida",
+          "Cut-leaf Goodenia"
+        ],
+        [
+          "Linum marginale",
+          "Native Flax"
+        ],
+        [
+          "Convolvulus angustissimus",
+          "Pink Bindweed"
+        ],
+        [
+          "Plantago gaudichaudii",
+          "Narrow Plantain"
+        ]
+      ]
+    },
+    {
+      "layer": "Low shrubs & groundcovers",
+      "note": "Sparse — mostly on stony rises and rocky ground.",
+      "plants": [
+        [
+          "Pimelea humilis",
+          "Common Rice-flower"
+        ],
+        [
+          "Atriplex semibaccata",
+          "Berry Saltbush"
+        ],
+        [
+          "Einadia nutans",
+          "Climbing Saltbush"
+        ],
+        [
+          "Enchylaena tomentosa",
+          "Ruby Saltbush"
+        ],
+        [
+          "Acacia paradoxa",
+          "Hedge Wattle"
+        ],
+        [
+          "Bursaria spinosa",
+          "Sweet Bursaria"
+        ]
+      ]
+    },
+    {
+      "layer": "Scattered trees",
+      "note": "Only along drainage lines and stony rises — keep the plain open.",
+      "plants": [
+        [
+          "Eucalyptus camaldulensis",
+          "River Red Gum (drainage lines)"
+        ],
+        [
+          "Allocasuarina verticillata",
+          "Drooping Sheoak (stony rises)"
+        ]
+      ]
+    }
+  ]
+}

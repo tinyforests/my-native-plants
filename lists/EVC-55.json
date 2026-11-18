@@ -1,0 +1,193 @@
+{
+  "system": "EVC",
+  "code": "55",
+  "reviewed": false,
+  "reviewedBy": "",
+  "reviewedAt": "",
+  "vegTitle": "Plains Grassy Woodland",
+  "vegSub": "EVC 55 · River Red Gum and Yellow Box woodland over grassland · Victorian Volcanic Plain",
+  "intro": "Before 1750 your address in Clifton Hill stood on the basalt plain above Merri Creek, in open woodland of widely spaced River Red Gum and Yellow Box over a deep, flowering grassland of Kangaroo Grass, wallaby grasses, lilies and daisies. Murnong (Yam Daisy) and Chocolate Lilies grew through the tussocks in spring. Very little of this woodland survives across Melbourne's north and west, and it is considered Endangered in this bioregion. The plants below are indigenous to it and grouped by the layer they fill. Keep the trees few and far apart, and give most of the space to the grassland beneath them.",
+  "sources": [
+    "Hand-written for FMNP requests, Nov 2026 — generalise the place-specific intro before marking reviewed"
+  ],
+  "layers": [
+    {
+      "layer": "Canopy trees",
+      "note": "Widely spaced — this is open woodland, not forest.",
+      "plants": [
+        [
+          "Eucalyptus camaldulensis",
+          "River Red Gum"
+        ],
+        [
+          "Eucalyptus melliodora",
+          "Yellow Box"
+        ],
+        [
+          "Eucalyptus microcarpa",
+          "Grey Box"
+        ]
+      ]
+    },
+    {
+      "layer": "Small trees & tall shrubs",
+      "note": "",
+      "plants": [
+        [
+          "Acacia implexa",
+          "Lightwood"
+        ],
+        [
+          "Acacia mearnsii",
+          "Black Wattle"
+        ],
+        [
+          "Acacia pycnantha",
+          "Golden Wattle"
+        ],
+        [
+          "Allocasuarina verticillata",
+          "Drooping Sheoak"
+        ],
+        [
+          "Bursaria spinosa",
+          "Sweet Bursaria"
+        ]
+      ]
+    },
+    {
+      "layer": "Shrubs & low shrubs",
+      "note": "",
+      "plants": [
+        [
+          "Acacia paradoxa",
+          "Hedge Wattle"
+        ],
+        [
+          "Acacia acinacea",
+          "Gold-dust Wattle"
+        ],
+        [
+          "Dillwynia cinerascens",
+          "Grey Parrot-pea"
+        ],
+        [
+          "Enchylaena tomentosa",
+          "Ruby Saltbush"
+        ],
+        [
+          "Atriplex semibaccata",
+          "Berry Saltbush"
+        ],
+        [
+          "Einadia nutans",
+          "Climbing Saltbush"
+        ]
+      ]
+    },
+    {
+      "layer": "Lilies, daisies & wildflowers",
+      "note": "The spring display between the tussocks.",
+      "plants": [
+        [
+          "Microseris walteri",
+          "Murnong (Yam Daisy)"
+        ],
+        [
+          "Arthropodium strictum",
+          "Chocolate Lily"
+        ],
+        [
+          "Bulbine bulbosa",
+          "Bulbine Lily"
+        ],
+        [
+          "Wurmbea dioica",
+          "Early Nancy"
+        ],
+        [
+          "Dianella admixta",
+          "Black-anther Flax-lily"
+        ],
+        [
+          "Chrysocephalum apiculatum",
+          "Common Everlasting"
+        ],
+        [
+          "Xerochrysum viscosum",
+          "Sticky Everlasting"
+        ],
+        [
+          "Calocephalus citreus",
+          "Lemon Beauty-heads"
+        ],
+        [
+          "Wahlenbergia communis",
+          "Tufted Bluebell"
+        ],
+        [
+          "Goodenia pinnatifida",
+          "Cut-leaf Goodenia"
+        ],
+        [
+          "Linum marginale",
+          "Native Flax"
+        ],
+        [
+          "Convolvulus angustissimus",
+          "Pink Bindweed"
+        ],
+        [
+          "Kennedia prostrata",
+          "Running Postman"
+        ],
+        [
+          "Dichondra repens",
+          "Kidney Weed"
+        ]
+      ]
+    },
+    {
+      "layer": "Grasses & tufting plants",
+      "note": "The ground layer that ties it together — give it most of the space.",
+      "plants": [
+        [
+          "Themeda triandra",
+          "Kangaroo Grass"
+        ],
+        [
+          "Rytidosperma caespitosum",
+          "Common Wallaby-grass"
+        ],
+        [
+          "Austrostipa bigeniculata",
+          "Kneed Spear-grass"
+        ],
+        [
+          "Bothriochloa macra",
+          "Red-leg Grass"
+        ],
+        [
+          "Microlaena stipoides",
+          "Weeping Grass"
+        ],
+        [
+          "Elymus scaber",
+          "Common Wheat-grass"
+        ],
+        [
+          "Dichelachne crinita",
+          "Long-hair Plume-grass"
+        ],
+        [
+          "Poa labillardierei",
+          "Common Tussock-grass (damper ground)"
+        ],
+        [
+          "Lomandra filiformis",
+          "Wattle Mat-rush"
+        ]
+      ]
+    }
+  ]
+}

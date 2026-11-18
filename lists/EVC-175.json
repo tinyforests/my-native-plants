@@ -1,0 +1,199 @@
+{
+  "system": "EVC",
+  "code": "175",
+  "reviewed": false,
+  "reviewedBy": "",
+  "reviewedAt": "",
+  "vegTitle": "Yarra Valley Grassy Woodland",
+  "vegSub": "MVS 9 · Eucalyptus woodland with a tussock grass understorey · in Victoria's terms, Grassy Woodland / Valley Grassy Forest (EVC 175 / 47), Gippsland Plain",
+  "intro": "Before 1750 your address in Ivanhoe East stood on the gentle rises above the Yarra River, in grassy woodland of Yellow Box, Red Box and River Red Gum over a tussocky floor of Kangaroo Grass, Grey Tussock-grass and wallaby grasses, with wattles, Cherry Ballart and Sweet Bursaria scattered through it and lilies, peas and daisies flowering between the tussocks in spring. Like most of Melbourne's grassy woodlands it has been almost entirely cleared, so bringing it back to a garden genuinely matters. The plants below are indigenous to it and grouped by the layer they fill. Plant the canopy first; the shrubs, lilies and grasses belong in the dappled light beneath it. For your exact Victorian vegetation class, look up your address at findmyevc.com.",
+  "sources": [
+    "Hand-written for FMNP requests, Nov 2026 — generalise the place-specific intro before marking reviewed"
+  ],
+  "layers": [
+    {
+      "layer": "Canopy trees",
+      "note": "The framework — plant these first, with space between them.",
+      "plants": [
+        [
+          "Eucalyptus melliodora",
+          "Yellow Box"
+        ],
+        [
+          "Eucalyptus polyanthemos",
+          "Red Box"
+        ],
+        [
+          "Eucalyptus camaldulensis",
+          "River Red Gum (lower, damper ground)"
+        ],
+        [
+          "Eucalyptus goniocalyx",
+          "Long-leaf Box"
+        ]
+      ]
+    },
+    {
+      "layer": "Small trees & tall shrubs",
+      "note": "",
+      "plants": [
+        [
+          "Acacia implexa",
+          "Lightwood"
+        ],
+        [
+          "Acacia mearnsii",
+          "Black Wattle"
+        ],
+        [
+          "Acacia pycnantha",
+          "Golden Wattle"
+        ],
+        [
+          "Exocarpos cupressiformis",
+          "Cherry Ballart"
+        ],
+        [
+          "Bursaria spinosa",
+          "Sweet Bursaria"
+        ],
+        [
+          "Allocasuarina littoralis",
+          "Black Sheoak"
+        ]
+      ]
+    },
+    {
+      "layer": "Shrubs",
+      "note": "",
+      "plants": [
+        [
+          "Acacia paradoxa",
+          "Hedge Wattle"
+        ],
+        [
+          "Acacia acinacea",
+          "Gold-dust Wattle"
+        ],
+        [
+          "Dillwynia cinerascens",
+          "Grey Parrot-pea"
+        ],
+        [
+          "Hibbertia riparia",
+          "Erect Guinea-flower"
+        ],
+        [
+          "Pimelea humilis",
+          "Common Rice-flower"
+        ]
+      ]
+    },
+    {
+      "layer": "Climbers & scramblers",
+      "note": "",
+      "plants": [
+        [
+          "Hardenbergia violacea",
+          "Purple Coral Pea"
+        ],
+        [
+          "Kennedia prostrata",
+          "Running Postman"
+        ],
+        [
+          "Clematis microphylla",
+          "Small-leaved Clematis"
+        ]
+      ]
+    },
+    {
+      "layer": "Lilies, daisies & wildflowers",
+      "note": "The spring display between the tussocks.",
+      "plants": [
+        [
+          "Arthropodium strictum",
+          "Chocolate Lily"
+        ],
+        [
+          "Bulbine bulbosa",
+          "Bulbine Lily"
+        ],
+        [
+          "Thysanotus patersonii",
+          "Twining Fringe-lily"
+        ],
+        [
+          "Wurmbea dioica",
+          "Early Nancy"
+        ],
+        [
+          "Dianella revoluta",
+          "Black-anther Flax-lily"
+        ],
+        [
+          "Microseris walteri",
+          "Murnong (Yam Daisy)"
+        ],
+        [
+          "Chrysocephalum apiculatum",
+          "Common Everlasting"
+        ],
+        [
+          "Xerochrysum viscosum",
+          "Sticky Everlasting"
+        ],
+        [
+          "Wahlenbergia communis",
+          "Tufted Bluebell"
+        ],
+        [
+          "Gonocarpus tetragynus",
+          "Common Raspwort"
+        ],
+        [
+          "Dichondra repens",
+          "Kidney Weed"
+        ]
+      ]
+    },
+    {
+      "layer": "Grasses & tufting plants",
+      "note": "The ground layer that ties it together.",
+      "plants": [
+        [
+          "Themeda triandra",
+          "Kangaroo Grass"
+        ],
+        [
+          "Poa sieberiana",
+          "Grey Tussock-grass"
+        ],
+        [
+          "Rytidosperma caespitosum",
+          "Common Wallaby-grass"
+        ],
+        [
+          "Microlaena stipoides",
+          "Weeping Grass"
+        ],
+        [
+          "Austrostipa rudis",
+          "Veined Spear-grass"
+        ],
+        [
+          "Dichelachne rara",
+          "Common Plume-grass"
+        ],
+        [
+          "Lomandra filiformis",
+          "Wattle Mat-rush"
+        ],
+        [
+          "Lomandra longifolia",
+          "Spiny-headed Mat-rush"
+        ]
+      ]
+    }
+  ]
+}
