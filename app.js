@@ -228,13 +228,35 @@ async function resolveTAS(place){
   return res;
 }
 
+// NV2005 requested for this lookup; empty coverage falls back explicitly to NVIS.
+async function resolveVIC(place){
+  const {lat, lng} = place, d = 0.0001;
+  for(const bbox of [`${lat-d},${lng-d},${lat+d},${lng+d}`, `${lng-d},${lat-d},${lng+d},${lat+d}`]){
+    try {
+      const params = new URLSearchParams({service:'WFS', version:'1.1.0', request:'GetFeature',
+        typeName:'open-data-platform:nv2005_evcbcs', outputFormat:'application/json',
+        srsName:'EPSG:4326', bbox: bbox + ',EPSG:4326'});
+      const r = await fetch('https://opendata.maps.vic.gov.au/geoserver/wfs?' + params,
+        {signal:AbortSignal.timeout(12000)});
+      if(!r.ok) continue;
+      const data = await r.json();
+      const a = data.features?.[0]?.properties;
+      const code = a && (a.evc ?? a.evc_no ?? a.EVC);
+      const name = a && (a.x_evcname || a.evc_name || a.X_EVCNAME);
+      if(code != null && name) return {system:'EVC', code:String(code), name,
+        character:characterFor(name), resolution:'state', source:'DEECA NV2005 EVC', status:'ok'};
+    } catch (_) { /* Retry axis order, then national mapping. */ }
+  }
+  return resolveNVIS(lat, lng, 'Victorian EVC mapping could not resolve this point. National mapping is shown instead.');
+}
+
 async function resolve(place){
   switch(place.state){
+    case 'VIC': return resolveVIC(place);
     case 'NSW': return resolveNSW(place);
     case 'QLD': return resolveQLD(place);
     case 'WA':  return resolveWA(place);
     case 'TAS': return resolveTAS(place);
-    // VIC resolves on the national layer here, then hands off to findmyevc for the sharp answer.
     default:    return resolveNVIS(place.lat, place.lng);
   }
 }
@@ -262,7 +284,7 @@ function renderState(title, body){
 function renderResult(place, res){
   const vic = place.state === 'VIC';
 
-  const handoff = vic ? `
+  const handoff = vic && res.system !== 'EVC' ? `
     <section class="handoff">
       <h3>Victoria is mapped in far more detail</h3>
       <p>Here the vegetation is classified as an Ecological Vegetation Class — hundreds of types with

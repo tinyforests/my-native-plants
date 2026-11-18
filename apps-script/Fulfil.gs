@@ -61,6 +61,7 @@ function processQueue() {
       data = sh.getDataRange().getValues(); // stamps may have touched sibling rows
     }
   } finally {
+    SpreadsheetApp.flush();
     lock.releaseLock();
   }
 }
@@ -76,6 +77,7 @@ function fulfil_(row) {
     Logger.log('fulfil_ failed for row ' + row + ': ' + err);
     return 'error';
   } finally {
+    SpreadsheetApp.flush();
     lock.releaseLock();
   }
 }
@@ -90,6 +92,7 @@ function fulfilRow_(sh, col, row, alerted) {
   if (v[col.status - 1] !== 'CONFIRMED') return 'skip';
   if (v[col.sentAt - 1] || v[col.draftedAt - 1]) return 'done';  // re-clicked confirm, etc.
   if (!sub.email || !sub.token || !sub.code) return 'skip';
+  if (isUnsubscribed_(sh, sub.email)) return 'unsubscribed';
   if (String(v[col.page - 1]) === '/backend-test') return 'skip';
 
   // Mixed polygons come through as "12.1.1/12.3.6" (dominant first). Prefer a list curated for
@@ -100,10 +103,14 @@ function fulfilRow_(sh, col, row, alerted) {
   if (!list && parts.length > 1) list = fetchList_(listKey_(sub.system, parts[0]));
 
   if (!list) {
-    if (!sub.needsListAt) {
-      stampSiblings_(sh, col, sub, 'needsListAt');
-      if (!alerted[key]) { notifyNeedsList_(sub, key); alerted[key] = true; }
-    }
+    var previouslyAlerted = sh.getDataRange().getValues().some(function(r, i) {
+      return i > 0 && normalEmail_(r[col.email - 1]) === normalEmail_(sub.email) &&
+        String(r[col.system - 1]) === String(sub.system) && String(r[col.code - 1]) === sub.code && r[col.needsListAt - 1];
+    });
+    stampSiblings_(sh, col, sub, 'needsListAt');
+    // Persist the claim while holding the shared lock, before any external side effect.
+    SpreadsheetApp.flush();
+    if (!previouslyAlerted) notifyNeedsList_(sub, key);
     return 'needs-list';
   }
 
@@ -169,7 +176,7 @@ function stampSiblings_(sh, col, sub, field) {
   var now = new Date();
   for (var i = 1; i < data.length; i++) {
     var r = data[i];
-    if (String(r[col.email - 1]).toLowerCase() === String(sub.email).toLowerCase() &&
+    if (normalEmail_(r[col.email - 1]) === normalEmail_(sub.email) &&
         String(r[col.system - 1]) === String(sub.system) &&
         String(r[col.code - 1]) === String(sub.code) &&
         !r[col[field] - 1]) {

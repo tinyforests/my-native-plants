@@ -7,7 +7,7 @@
  *   2. The person clicks the link  -> GET ?action=confirm&token=...   -> status CONFIRMED,
  *      then redirected to /confirmed/.
  *   3. Every list email you later send includes an unsubscribe link
- *      GET ?action=unsubscribe&token=...  -> status UNSUBSCRIBED, redirect to /unsubscribed/.
+ *      GET shows a button; only its POST unsubscribes all rows for the address.
  *
  * DEPLOY
  *   1. Create a Google Sheet. Put its ID in SHEET_ID below (the long id in the URL).
@@ -22,12 +22,9 @@
  *   - Every email goes out FROM hello@gardenerandson.com (CONFIG.FROM_EMAIL) via GmailApp. That
  *     address must be a verified "Send mail as" alias on the script owner's Gmail, or sends stop
  *     with an error rather than going out from the owner's own address.
- *   - (old note) MailApp sends from the Google account that owns the script. Set FROM_NAME so the
- *     display name reads "Gardener & Son", and consider a Gmail "Send mail as" alias if
- *     you want a branded from-address.
  *   - Apps Script web apps can't return a real 302, so confirm/unsubscribe return a tiny
- *     HTML page that redirects. Bots that pre-fetch links won't run the JS; the status is
- *     still set server-side on the GET, which is what matters.
+ *     HTML page. Confirmation and unsubscribe GETs never change consent; status is
+ *     changed only by an explicit POST.
  */
 
 var CONFIG = {
@@ -36,6 +33,7 @@ var CONFIG = {
   SITE: 'https://findmynativeplants.com.au',
   CONFIRM_REDIRECT: 'https://findmynativeplants.com.au/confirmed/',
   UNSUB_REDIRECT: 'https://findmynativeplants.com.au/unsubscribed/',
+  WEB_APP_URL: 'https://script.google.com/macros/s/AKfycbwQAufeg1z8ivI7NK6gVvCkI8TYvKhutuCla01ILif2AHst6FFwp8lSLlKtsTjkG6t-/exec',
   FROM_EMAIL: 'hello@gardenerandson.com',
   FROM_NAME: 'Gardener & Son',
   STUDIO: 'Gardener & Son · 2 Churchill Street, Mont Albert VIC 3127'
@@ -63,6 +61,7 @@ function findRowByToken_(sh, token) {
 /** Web app entry — subscribe (POST from the site) or confirm (POST from the confirm button). */
 function doPost(e) {
   var p = (e && e.parameter) || {};
+  if (p.action === 'unsubscribe' && p.token) return unsubscribe_(p.token);
   if (p.action === 'confirm' && p.token) return confirm_(p.token);
 
   // Serialise subscribes: near-simultaneous duplicate POSTs otherwise all miss each other's rows.
@@ -74,6 +73,8 @@ function doPost(e) {
     if (String(p.consent) !== 'true') return json_({ ok: false, error: 'consent required' });
 
     var sh = sheet_();
+
+    if (isUnsubscribed_(sh, email)) return json_({ ok: true, status: 'unsubscribed' });
 
     // Resubmits reuse the existing row for the same person + community instead of piling up
     // new rows, tokens and confirmation emails.
@@ -119,9 +120,7 @@ function doGet(e) {
         if (sh.getRange(row, 3).getValue() === 'CONFIRMED') return redirect_(CONFIG.CONFIRM_REDIRECT);
         return confirmPage_(token);
       } else {
-        sh.getRange(row, 3).setValue('UNSUBSCRIBED');
-        sh.getRange(row, 15).setValue(new Date());
-        return redirect_(CONFIG.UNSUB_REDIRECT);
+        return unsubscribePage_(token);
       }
     }
   }
@@ -129,23 +128,62 @@ function doGet(e) {
   return redirect_(CONFIG.SITE + '/');
 }
 
+function normalEmail_(email) { return String(email || '').trim().toLowerCase(); }
+
+function isUnsubscribed_(sh, email) {
+  return sh.getDataRange().getValues().some(function(r, i) {
+    return i > 0 && normalEmail_(r[1]) === normalEmail_(email) && r[2] === 'UNSUBSCRIBED';
+  });
+}
+
+function unsubscribe_(token) {
+  var lock = LockService.getScriptLock();
+  lock.waitLock(15000);
+  try {
+    var sh = sheet_(), row = findRowByToken_(sh, token);
+    if (row < 0) return redirect_(CONFIG.SITE + '/');
+    var email = normalEmail_(sh.getRange(row, 2).getValue());
+    var data = sh.getDataRange().getValues(), now = new Date();
+    for (var i = 1; i < data.length; i++) {
+      if (normalEmail_(data[i][1]) !== email) continue;
+      sh.getRange(i + 1, 3).setValue('UNSUBSCRIBED');
+      sh.getRange(i + 1, 15).setValue(now);
+    }
+    SpreadsheetApp.flush();
+    return redirect_(CONFIG.UNSUB_REDIRECT);
+  } finally { lock.releaseLock(); }
+}
+
+function unsubscribePage_(token) {
+  return HtmlService.createHtmlOutput('<!doctype html><meta charset="utf-8">' +
+    '<h1>Unsubscribe from Find My Native Plants</h1><p>Press the button to stop emails to this address.</p>' +
+    '<form method="post" target="_top" action="' + CONFIG.WEB_APP_URL + '">' +
+    '<input type="hidden" name="action" value="unsubscribe">' +
+    '<input type="hidden" name="token" value="' + escapeHtml_(token) + '">' +
+    '<button type="submit">Unsubscribe</button></form>').setTitle('Unsubscribe — Find My Native Plants');
+}
+
 function confirm_(token) {
-  var sh = sheet_();
-  var row = findRowByToken_(sh, token);
-  if (row < 0) return redirect_(CONFIG.SITE + '/');
-  var status = sh.getRange(row, 3).getValue();
-  if (status === 'UNSUBSCRIBED') return redirect_(CONFIG.UNSUB_REDIRECT);
-  if (status !== 'CONFIRMED') {
-    sh.getRange(row, 3).setValue('CONFIRMED');
-    sh.getRange(row, 14).setValue(new Date());
-  }
-  // Serve the planting list straight away if we have one (see Fulfil.gs).
+  var lock = LockService.getScriptLock();
+  lock.waitLock(15000);
+  var row;
+  try {
+    var sh = sheet_();
+    row = findRowByToken_(sh, token);
+    if (row < 0) return redirect_(CONFIG.SITE + '/');
+    if (isUnsubscribed_(sh, sh.getRange(row, 2).getValue())) return redirect_(CONFIG.UNSUB_REDIRECT);
+    if (sh.getRange(row, 3).getValue() !== 'CONFIRMED') {
+      sh.getRange(row, 3).setValue('CONFIRMED');
+      sh.getRange(row, 14).setValue(new Date());
+    }
+    SpreadsheetApp.flush();
+  } finally { lock.releaseLock(); }
   if (typeof fulfil_ === 'function') fulfil_(row);
   return redirect_(CONFIG.CONFIRM_REDIRECT);
 }
 
 function confirmPage_(token) {
-  var url = ScriptApp.getService().getUrl();
+  var url = CONFIG.WEB_APP_URL;
   return HtmlService.createHtmlOutput(
     '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
     '<div style="font-family:Georgia,serif;color:#2b3126;max-width:460px;margin:48px auto;padding:0 20px;line-height:1.6">' +
@@ -164,7 +202,7 @@ function confirmPage_(token) {
 }
 
 function sendConfirmationEmail_(email, token, p) {
-  var confirmUrl = ScriptApp.getService().getUrl() + '?action=confirm&token=' + encodeURIComponent(token);
+  var confirmUrl = CONFIG.WEB_APP_URL + '?action=confirm&token=' + encodeURIComponent(token);
   // Avoid "Regional Ecosystem 12.5.3 · 12.5.3" when the name already carries the code.
   var name = String(p.name || ''), code = String(p.code || '');
   var veg = (code && name.indexOf(code) === -1) ? [name, code].filter(String).join(' · ') : (name || code);
@@ -192,10 +230,10 @@ function sendConfirmationEmail_(email, token, p) {
 
 /**
  * Helper for your species-list sends (the FMEG pipeline): build the unsubscribe URL for a
- * subscriber's token so every marketing email carries a working one-click unsubscribe.
+ * subscriber's token so each list email offers a confirmation page for unsubscribe.
  */
 function unsubscribeUrl(token) {
-  return ScriptApp.getService().getUrl() + '?action=unsubscribe&token=' + encodeURIComponent(token);
+  return CONFIG.WEB_APP_URL + '?action=unsubscribe&token=' + encodeURIComponent(token);
 }
 
 /** Latest row for this person + community: CONFIRMED (any age) or PENDING (last 48h). */
