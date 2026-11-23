@@ -294,7 +294,7 @@ function renderResult(place, res){
       </label>
       <p class="done" id="gateDone" hidden>
         <strong>Almost there — check your inbox.</strong> We’ve sent a confirmation link to that address.
-        Click it and you’re on the list. (No confirmation, no emails — that’s how double opt-in works.)
+        Click it and you’re on the list. It comes from <strong>hello@gardenerandson.com</strong>; if it hasn’t arrived in a few minutes, please check your spam or promotions folder.
       </p>
     </section>` : '';
 
